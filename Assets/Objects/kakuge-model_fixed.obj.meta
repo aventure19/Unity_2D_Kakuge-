@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 38e523c40c0442444b11f8805df86c4f
-timeCreated: 1471066808
+timeCreated: 1471071962
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -12,6 +12,8 @@ ModelImporter:
     2300000: default
     3300000: default
     4300000: default
+    9500000: //RootNode
+    11100000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -22,11 +24,17 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    animationImportErrors: 
+    animationImportErrors: '
+
+      Imported file ''kakuge-model_fixed'' conversion failed: Required human bone
+      ''Hips'' not found
+
+
+'
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -70,7 +78,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
