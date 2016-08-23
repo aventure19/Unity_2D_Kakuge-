@@ -16,12 +16,20 @@ public class ElementScript : MonoBehaviour
     [SerializeField]
     private Vector3 moveDirection;
 
+    void Awake()
+    {
+
+        Application.targetFrameRate = 60;
+
+    }
+
     // Use this for initialization
     void Start()
     {
 
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+
 
     }
 
@@ -72,4 +80,15 @@ public class ElementScript : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
     }
+
+    void OnGUI()
+    {
+
+        float fps = 1 / Time.deltaTime;
+
+        GUILayout.Label(fps.ToString());
+
+    }
+
+
 }

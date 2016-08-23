@@ -6,23 +6,24 @@ public class CameraScript : MonoBehaviour
 
     public Transform target1;
     public Transform target2;
+
     public Vector3 CameraOffset = new Vector3(0, 2.5f, -5f);
 
-    private float StartDistance;
+    float startDistance;
 
     void Start()
     {
 
-        StartDistance = Vector3.Distance(target1.position, target2.position);
+        startDistance = Vector3.Distance(target1.position, target2.position);
 
     }
 
     void OnPreRender()
     {
 
-        float CurrentDistance = Vector3.Distance(target1.position, target2.position);
+        float t = Vector3.Distance(target1.position, target2.position) / startDistance;
 
-        float t = CurrentDistance / StartDistance;
+        if (t < 1) t = 1;
 
         Camera.main.transform.position = (target1.position + target2.position) / 2 + CameraOffset * t;
 
