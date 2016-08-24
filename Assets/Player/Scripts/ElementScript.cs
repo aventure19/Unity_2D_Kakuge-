@@ -6,12 +6,24 @@ using System.Collections;
 public class ElementScript : MonoBehaviour
 {
 
-    public float Speed = 5;
-    public float JumpPower = 10;
+    public float Speed = 4;
+    public float JumpPower = 5;
     public float Gravity = 9.8f;
 
     private Animator animator;
     private CharacterController controller;
+
+    private enum State
+    {
+        Move,
+        Jump,
+        Punch,
+        Kick
+    }
+
+    [SerializeField]
+    private State state;
+    private State oldState;
 
     [SerializeField]
     private Vector3 moveDirection;
@@ -30,6 +42,9 @@ public class ElementScript : MonoBehaviour
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
 
+        // Stateの初期化
+        state = oldState = State.Move;
+
 
     }
 
@@ -37,58 +52,109 @@ public class ElementScript : MonoBehaviour
     void Update()
     {
 
-        // 地上
-        if (controller.isGrounded == true)
+        // stateの値をもとに状態遷移
+        switch (state)
         {
 
-            // 水平移動
-            moveDirection.x = Input.GetAxis("Horizontal");
+            case State.Move:
 
-            // ジャンプ
-            if (Input.GetAxis("Vertical") > 0.8f)
-            {
+                // 状態遷移時に一回だけ呼ばれる
+                if (oldState != state) animator.Play("Move");
 
-                moveDirection.y = JumpPower;
+                // 水平移動
+                moveDirection.x = Input.GetAxis("Horizontal");
 
-                animator.SetTrigger("Jump");
+                // アニメーターに横移動速度を渡す
+                animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
-            }
+                // 状態遷移
+                if (Input.GetButtonDown("Fire1")) state = State.Punch;
+                else if (Input.GetButtonDown("Fire2")) state = State.Kick;
+                else if (Input.GetAxis("Vertical") > 0.8f) state = State.Jump;
 
-            animator.SetBool("IsGrounded", true);
+                // oldStateに現在のステートを代入
+                oldState = State.Move;
 
-            // パンチ
-            if (Input.GetButtonDown("Fire1") == true) animator.SetTrigger("Punch");
+                break;
 
-            // キック
-            if (Input.GetButtonDown("Fire2") == true) animator.SetTrigger("Kick");
+            case State.Jump:
 
-        }
-        // 空中
-        else
-        {
+                // 状態遷移時に一回だけ呼ばれる
+                if (oldState != state)
+                {
 
-            animator.SetBool("IsGrounded", false);
+                    moveDirection.y = JumpPower;
 
-            moveDirection.y -= Gravity * Time.deltaTime;
+                    animator.Play("Jump");
+
+                }
+
+                // 状態遷移
+                if (controller.isGrounded)
+                {
+                    state = State.Move;
+                }
+                else
+                {
+                    moveDirection.y -= Gravity * Time.deltaTime;
+                }
+
+                // oldStateに現在のステートを代入
+                oldState = State.Jump;
+
+                break;
+
+            case State.Punch:
+
+                // 状態遷移時に一回だけ呼ばれる
+                if (oldState != state)
+                {
+
+                    animator.Play("Punch");
+
+                    moveDirection.x = 0;
+
+                }
+
+                // 状態遷移
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) state = State.Move;
+
+                // oldStateに現在のステートを代入
+                oldState = State.Punch;
+
+                break;
+
+            case State.Kick:
+
+                // 状態遷移時に一回だけ呼ばれる
+                if (oldState != state)
+                {
+
+                    animator.Play("Kick");
+
+                    moveDirection.x = 0;
+
+                }
+
+                // 状態遷移
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) state = State.Move;
+
+                // oldStateに現在のステートを代入
+                oldState = State.Kick;
+
+                break;
+
+            default:
+
+                state = oldState = State.Move;
+
+                break;
 
         }
 
         // 移動確定
         controller.Move(moveDirection * Speed * Time.deltaTime);
 
-        // アニメーターに横移動速度を渡す
-        animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
-
     }
-
-    void OnGUI()
-    {
-
-        float fps = 1 / Time.deltaTime;
-
-        GUILayout.Label(fps.ToString());
-
-    }
-
 
 }
