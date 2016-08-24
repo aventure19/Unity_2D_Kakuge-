@@ -10,6 +10,8 @@ public class ElementScript : MonoBehaviour
     public float JumpPower = 5;
     public float Gravity = 9.8f;
 
+    public GameObject Enemy;
+
     private Animator animator;
     private CharacterController controller;
 
@@ -63,6 +65,9 @@ public class ElementScript : MonoBehaviour
 
                 // 水平移動
                 moveDirection.x = Input.GetAxis("Horizontal");
+
+                // 方向転換
+                LookAtEnemy();
 
                 // アニメーターに横移動速度を渡す
                 animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
@@ -154,6 +159,18 @@ public class ElementScript : MonoBehaviour
 
         // 移動確定
         controller.Move(moveDirection * Speed * Time.deltaTime);
+
+    }
+
+    public void LookAtEnemy()
+    {
+
+        int t;
+
+        if (transform.position.x < Enemy.transform.position.x) t = 90;
+        else t = -90;
+
+        transform.rotation = Quaternion.Euler(Vector3.up * t);
 
     }
 
