@@ -10,7 +10,11 @@ public class ElementScript : MonoBehaviour
     public float JumpPower = 5;
     public float Gravity = 9.8f;
 
-    public GameObject Enemy;
+    // animation遷移にかける時間
+    public float TransitionDuration = 0.1f;
+
+    // 敵の位置
+    public Transform Enemy;
 
     private Animator animator;
     private CharacterController controller;
@@ -29,13 +33,6 @@ public class ElementScript : MonoBehaviour
 
     [SerializeField]
     private Vector3 moveDirection;
-
-    void Awake()
-    {
-
-        Application.targetFrameRate = 60;
-
-    }
 
     // Use this for initialization
     void Start()
@@ -90,7 +87,7 @@ public class ElementScript : MonoBehaviour
 
                     moveDirection.y = JumpPower;
 
-                    animator.Play("Jump");
+                    animator.CrossFade("Jump", TransitionDuration);
 
                 }
 
@@ -115,7 +112,7 @@ public class ElementScript : MonoBehaviour
                 if (oldState != state)
                 {
 
-                    animator.Play("Punch");
+                    animator.CrossFade("Punch", TransitionDuration);
 
                     moveDirection.x = 0;
 
@@ -135,7 +132,7 @@ public class ElementScript : MonoBehaviour
                 if (oldState != state)
                 {
 
-                    animator.Play("Kick");
+                    animator.CrossFade("Kick", TransitionDuration);
 
                     moveDirection.x = 0;
 
