@@ -11,7 +11,7 @@ public class ElementScript : MonoBehaviour
     public float Gravity = 9.8f;
 
     // animation遷移にかける時間
-    public float TransitionDuration = 0.1f;
+    public float TransitionDuration = 0.01f;
 
     // 敵の位置
     public Transform Enemy;
@@ -58,7 +58,7 @@ public class ElementScript : MonoBehaviour
             case State.Move:
 
                 // 状態遷移時に一回だけ呼ばれる
-                if (oldState != state) animator.Play("Move");
+                if (oldState != state) animator.CrossFadeInFixedTime("Move", TransitionDuration);
 
                 // 水平移動
                 moveDirection.x = Input.GetAxis("Horizontal");
@@ -87,7 +87,7 @@ public class ElementScript : MonoBehaviour
 
                     moveDirection.y = JumpPower;
 
-                    animator.CrossFade("Jump", TransitionDuration);
+                    animator.CrossFadeInFixedTime("Jump", TransitionDuration);
 
                 }
 
@@ -112,7 +112,7 @@ public class ElementScript : MonoBehaviour
                 if (oldState != state)
                 {
 
-                    animator.CrossFade("Punch", TransitionDuration);
+                    animator.CrossFadeInFixedTime("Punch", TransitionDuration);
 
                     moveDirection.x = 0;
 
@@ -132,7 +132,7 @@ public class ElementScript : MonoBehaviour
                 if (oldState != state)
                 {
 
-                    animator.CrossFade("Kick", TransitionDuration);
+                    animator.CrossFadeInFixedTime("Kick", TransitionDuration);
 
                     moveDirection.x = 0;
 

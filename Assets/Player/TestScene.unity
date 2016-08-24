@@ -470,6 +470,11 @@ Prefab:
       propertyPath: Enemy
       value: 
       objectReference: {fileID: 529787084}
+    - target: {fileID: 114000013631822172, guid: d8adecd2c4787754e8c49d4a6fb7f051,
+        type: 2}
+      propertyPath: TransitionDuration
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8adecd2c4787754e8c49d4a6fb7f051, type: 2}
   m_IsPrefabParent: 0
@@ -694,6 +699,47 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &1937289802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1937289804}
+  - 114: {fileID: 1937289803}
+  m_Layer: 0
+  m_Name: FPSCount
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1937289803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1937289802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80adab4741de71d45b8232bdb368240d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FPS: 60
+--- !u!4 &1937289804
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1937289802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1 &1940497730
 GameObject:
   m_ObjectHideFlags: 0
