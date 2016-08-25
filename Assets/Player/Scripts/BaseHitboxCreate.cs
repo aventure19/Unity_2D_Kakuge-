@@ -14,16 +14,18 @@ public class BaseHitboxCreate : MonoBehaviour {
         /*******************/
 
         // プレハブからインスタンスを生成
-        GameObject obj = (GameObject)Instantiate(prefab, GameObject.Find("Element").transform.position, Quaternion.identity);
+        // GameObject obj = (GameObject)Instantiate(prefab, GameObject.Find("Element").transform.position, Quaternion.identity);
         GameObject obj1 = (GameObject)Instantiate(prefab, GameObject.Find("Element (1)").transform.position, Quaternion.identity);
         /******************/
 
         // 作成したオブジェクトを子として登録
-        obj.transform.parent = GameObject.Find("Element").transform;
+        // obj.transform.parent = GameObject.Find("Element").transform;
         obj1.transform.parent = GameObject.Find("Element (1)").transform;
         /******************/
 
     }
+
+   
 
 
 }

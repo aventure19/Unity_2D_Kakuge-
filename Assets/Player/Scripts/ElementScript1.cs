@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
-public class ElementScript : MonoBehaviour
+public class ElementScript1 : MonoBehaviour
 {
 
     public float Speed = 4;
@@ -175,18 +175,6 @@ public class ElementScript : MonoBehaviour
     {
 
         Debug.Log(gameObject.ToString() + "isHited");
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-        if (other.tag == "Attack")
-        {
-
-            isHited();
-
-        }
 
     }
 
