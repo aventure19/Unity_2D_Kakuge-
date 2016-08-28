@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
-public class ElementScript1 : MonoBehaviour
+public class ElementScript_old : MonoBehaviour
 {
 
     public float Speed = 4;
@@ -112,7 +112,7 @@ public class ElementScript1 : MonoBehaviour
                 if (oldState != state)
                 {
 
-                    animator.CrossFadeInFixedTime("Punch", TransitionDuration);
+                    animator.CrossFadeInFixedTime("Jab", TransitionDuration);
 
                     moveDirection.x = 0;
 
@@ -159,6 +159,7 @@ public class ElementScript1 : MonoBehaviour
 
     }
 
+    // 敵の方向を向くメソッド
     public void LookAtEnemy()
     {
 
@@ -171,10 +172,92 @@ public class ElementScript1 : MonoBehaviour
 
     }
 
+    // 攻撃を受けたときに呼ばれるメソッド
     public void isHited()
     {
 
         Debug.Log(gameObject.ToString() + "isHited");
+
+    }
+
+    // 攻撃判定を作る
+    public void AttackStart(string PartName)
+    {
+
+        // 全探索
+        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
+
+        foreach(Transform child in transformArray)
+        {
+
+            if (child.name == PartName)
+            {
+
+                try
+                {
+
+                    child.GetComponent<Collider>().enabled = true;
+
+                }
+                catch (System.Exception e)
+                {
+
+                    Debug.Log(e);
+                    
+                }
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    // 攻撃判定を消す
+    public void AttackEnd(string PartName)
+    {
+
+        // 全探索
+        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in transformArray)
+        {
+
+            if (child.name == PartName)
+            {
+
+                try
+                {
+
+                    child.GetComponent<Collider>().enabled = false;
+
+                }
+                catch (System.Exception e)
+                {
+
+                    Debug.Log(e);
+
+                }
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        // 自分の攻撃には反応しない
+        if (other.tag == "Attack" && other.transform.root != transform)
+        {
+
+            isHited();
+
+        }
 
     }
 

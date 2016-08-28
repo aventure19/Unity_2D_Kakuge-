@@ -6,30 +6,30 @@ using System.Collections;
 public class ElementScript : MonoBehaviour
 {
 
+    // inspectorで編集可能なフィールド
     public float Speed = 4;
     public float JumpPower = 5;
     public float Gravity = 9.8f;
-
-    // animation遷移にかける時間
-    public float TransitionDuration = 0.01f;
+    public int PlayerNumber;
 
     // 敵の位置
     public Transform Enemy;
 
-    private Animator animator;
-    private CharacterController controller;
-
+    // 状態
     private enum State
     {
         Move,
         Jump,
-        Punch,
-        Kick
+        DuringAttack,
+        DamageDown
     }
 
     [SerializeField]
     private State state;
-    private State oldState;
+
+    // 各コンポーネント
+    private Animator animator;
+    private CharacterController controller;
 
     [SerializeField]
     private Vector3 moveDirection;
@@ -38,12 +38,9 @@ public class ElementScript : MonoBehaviour
     void Start()
     {
 
+        // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
-
-        // Stateの初期化
-        state = oldState = State.Move;
-
 
     }
 
@@ -57,11 +54,8 @@ public class ElementScript : MonoBehaviour
 
             case State.Move:
 
-                // 状態遷移時に一回だけ呼ばれる
-                if (oldState != state) animator.CrossFadeInFixedTime("Move", TransitionDuration);
-
                 // 水平移動
-                moveDirection.x = Input.GetAxis("Horizontal");
+                moveDirection.x = Input.GetAxis("Horizontal " + PlayerNumber);
 
                 // 方向転換
                 LookAtEnemy();
@@ -70,85 +64,77 @@ public class ElementScript : MonoBehaviour
                 animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
                 // 状態遷移
-                if (Input.GetButtonDown("Fire1")) state = State.Punch;
-                else if (Input.GetButtonDown("Fire2")) state = State.Kick;
-                else if (Input.GetAxis("Vertical") > 0.8f) state = State.Jump;
+                if (Input.GetButtonDown("Fire1 " + PlayerNumber))
+                {
 
-                // oldStateに現在のステートを代入
-                oldState = State.Move;
+                    moveDirection.x = 0;
+
+                    animator.SetTrigger("Jab");
+
+                    state = State.DuringAttack;
+
+                }
+                else if (Input.GetButtonDown("Fire2 " + PlayerNumber))
+                {
+
+                    moveDirection.x = 0;
+
+                    animator.SetTrigger("Kick");
+
+                    state = State.DuringAttack;
+
+                }
+
+                else if (Input.GetButtonDown("Jump " + PlayerNumber))
+                {
+
+                    moveDirection.y = JumpPower;
+
+                    animator.SetBool("Jump", true);
+
+                    state = State.Jump;
+
+                }
 
                 break;
 
             case State.Jump:
 
-                // 状態遷移時に一回だけ呼ばれる
-                if (oldState != state)
-                {
-
-                    moveDirection.y = JumpPower;
-
-                    animator.CrossFadeInFixedTime("Jump", TransitionDuration);
-
-                }
-
                 // 状態遷移
-                if (controller.isGrounded)
+                if (IsGrounded())
                 {
+
+                    animator.SetBool("Jump", false);
+
                     state = State.Move;
+
                 }
                 else
                 {
                     moveDirection.y -= Gravity * Time.deltaTime;
                 }
 
-                // oldStateに現在のステートを代入
-                oldState = State.Jump;
+                break;
+
+            case State.DuringAttack:
+
+                // 何もしない
 
                 break;
 
-            case State.Punch:
+            case State.DamageDown:
 
-                // 状態遷移時に一回だけ呼ばれる
-                if (oldState != state)
+                if (GetAnyButtonDown() == true)
                 {
 
-                    animator.CrossFadeInFixedTime("Punch", TransitionDuration);
-
-                    moveDirection.x = 0;
+                    animator.SetTrigger("Headspring");
 
                 }
-
-                // 状態遷移
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) state = State.Move;
-
-                // oldStateに現在のステートを代入
-                oldState = State.Punch;
-
-                break;
-
-            case State.Kick:
-
-                // 状態遷移時に一回だけ呼ばれる
-                if (oldState != state)
-                {
-
-                    animator.CrossFadeInFixedTime("Kick", TransitionDuration);
-
-                    moveDirection.x = 0;
-
-                }
-
-                // 状態遷移
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1) state = State.Move;
-
-                // oldStateに現在のステートを代入
-                oldState = State.Kick;
-
                 break;
 
             default:
 
-                state = oldState = State.Move;
+                state = State.Move;
 
                 break;
 
@@ -159,7 +145,32 @@ public class ElementScript : MonoBehaviour
 
     }
 
-    public void LookAtEnemy()
+    void OnTriggerEnter(Collider other)
+    {
+
+        // 自分の攻撃には反応しない
+        if (other.tag == "Attack" && other.transform.root != transform)
+        {
+
+            isHited();
+
+        }
+
+    }
+
+    // 接地しているかを返すメソッド
+    private bool IsGrounded()
+    {
+
+        // キャラクターの中心からレイを下方向に飛ばし、地面に設置しているかどうかを調べる
+        if (Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), 1f)) return true;
+
+        return false;
+
+    }
+
+    // 敵の方向を向くメソッド
+    private void LookAtEnemy()
     {
 
         int t;
@@ -171,22 +182,105 @@ public class ElementScript : MonoBehaviour
 
     }
 
-    public void isHited()
+    // 何かボタンが押されていたらtrueを返すメソッド
+    private bool GetAnyButtonDown()
     {
 
-        Debug.Log(gameObject.ToString() + "isHited");
+        if (Input.GetButtonDown("Fire1 " + PlayerNumber) || Input.GetButtonDown("Fire2 " + PlayerNumber) || Input.GetButtonDown("Fire3 " + PlayerNumber) || Input.GetButtonDown("Jump " + PlayerNumber))
+            return true;
+
+        return false;
 
     }
 
-    void OnTriggerEnter(Collider other)
+    // 攻撃を受けたときに呼ばれるメソッド
+    public void isHited()
     {
 
-        if (other.tag == "Attack")
+        // ジャンプ中に攻撃を受けたとき
+        if (state == State.Jump) animator.SetBool("Jump", false);
+
+        animator.Play("DamageDown");
+
+        moveDirection.x = 0;
+
+        state = State.DamageDown;
+
+    }
+
+    // 攻撃判定を作る
+    public void AttackStart(string PartName)
+    {
+
+        // 全探索
+        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in transformArray)
         {
 
-            isHited();
+            if (child.name == PartName)
+            {
+
+                try
+                {
+
+                    child.GetComponent<Collider>().enabled = true;
+
+                }
+                catch (System.Exception e)
+                {
+
+                    Debug.Log(e);
+
+                }
+
+                break;
+
+            }
 
         }
+
+    }
+
+    // 攻撃判定を消す
+    public void AttackEnd(string PartName)
+    {
+
+        // 全探索
+        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
+
+        foreach (Transform child in transformArray)
+        {
+
+            if (child.name == PartName)
+            {
+
+                try
+                {
+
+                    child.GetComponent<Collider>().enabled = false;
+
+                }
+                catch (System.Exception e)
+                {
+
+                    Debug.Log(e);
+
+                }
+
+                break;
+
+            }
+
+        }
+
+    }
+
+    // Stateをアニメーションイベントから操作
+    public void SetMoveState()
+    {
+
+        state = State.Move;
 
     }
 
