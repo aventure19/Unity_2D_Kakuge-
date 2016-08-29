@@ -12,6 +12,12 @@ public class ElementScript : MonoBehaviour
     public float Gravity = 9.8f;
     public int PlayerNumber;
 
+    // HP等諸変数
+    public int HP = 1000;
+    public int DefaultHP;
+
+    public GameObject a;
+
     // 敵の位置
     public Transform Enemy;
 
@@ -37,6 +43,8 @@ public class ElementScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //デフォルトのHPを格納
+        DefaultHP = HP;
 
         // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
@@ -47,6 +55,18 @@ public class ElementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // HPの変更処理(yキーでテスト可能)
+        if (Input.GetKeyDown("y"))
+        {
+            Debug.Log("y pressed.");
+            HP -= 20;
+            Debug.Log("HP is Changed");
+
+            HPGuageConfiguration(true);
+        }
+
+        if (HP < 0) HP = 0;
 
         // stateの値をもとに状態遷移
         switch (state)
@@ -282,6 +302,24 @@ public class ElementScript : MonoBehaviour
 
         state = State.Move;
 
+    }
+
+    // ゲージの長さを調節する(yキーでテスト可能)
+    public void HPGuageConfiguration(bool HPGTrigger)
+    {
+        if (HPGTrigger == true)
+        {
+            a.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1); // locScaleでgameObjのx軸スケールを変更
+        }
+
+        if (a.transform.localScale.x < 0)
+        {
+            a.transform.localScale = new Vector3(0, 1, 1);
+        }
+
+        Debug.Log("Scale is Changed.");
+
+        HPGTrigger = false;
     }
 
 }

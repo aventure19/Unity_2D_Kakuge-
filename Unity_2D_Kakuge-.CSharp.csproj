@@ -61,17 +61,12 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.iOS.Extensions.Common">
-      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Player\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Player\Scripts\ElementScript.cs" />
     <Compile Include="Assets\Player\Scripts\ElementScript_old.cs" />
+    <Compile Include="Assets\Player\Scripts\FollowingTarget.cs" />
     <Compile Include="Assets\Player\Scripts\FrameCounter.cs" />
     <Compile Include="Assets\Scripts\Absolute_Move.cs" />
     <Compile Include="Assets\Scripts\Gizmo.cs" />
