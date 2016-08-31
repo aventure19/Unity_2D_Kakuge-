@@ -19234,7 +19234,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.48333332
+    m_StopTime: 0.48333335
     m_OrientationOffsetY: 0
     m_Level: -0.15
     m_CycleOffset: 0
@@ -65201,14 +65201,14 @@ AnimationClip:
     objectReferenceParameter: {fileID: 1000013967696070, guid: d8adecd2c4787754e8c49d4a6fb7f051,
       type: 2}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 5
     messageOptions: 0
   - time: 0.18333334
     functionName: AttackEnd
     data: hand.L
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 5
     messageOptions: 0
   - time: 0.48333332
     functionName: SetMoveState

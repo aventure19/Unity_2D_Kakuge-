@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
@@ -14,9 +15,13 @@ public class ElementScript : MonoBehaviour
 
     // HP等諸変数
     public int HP = 1000;
-    public int DefaultHP;
+    public int DefaultHP = 1000;
 
-    public GameObject a;
+    // HPbar
+    public Image HPGauge;
+
+    // 各攻撃判定
+    public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
 
     // 敵の位置
     public Transform Enemy;
@@ -118,6 +123,7 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+
             case State.Jump:
 
                 // 状態遷移
@@ -136,21 +142,38 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+
             case State.DuringAttack:
 
                 // 何もしない
 
                 break;
 
+
             case State.DamageDown:
 
-                if (GetAnyButtonDown() == true)
+                // 地面
+                if (IsGrounded())
+                {
+                    if (GetAnyButtonDown() == true)
+                    {
+
+                        animator.SetTrigger("Headspring");
+
+                    }
+                }
+
+                // 空中
+                else
                 {
 
-                    animator.SetTrigger("Headspring");
+                    // 重力
+                    moveDirection.y -= Gravity * Time.deltaTime;
 
                 }
+
                 break;
+
 
             default:
 
@@ -224,79 +247,46 @@ public class ElementScript : MonoBehaviour
 
         moveDirection.x = 0;
 
+        // 攻撃判定をすべて消す
+        AttackAllEnd();
+
         state = State.DamageDown;
 
     }
 
     // 攻撃判定を作る
-    public void AttackStart(string PartName)
+    public void AttackStart(int AttackDecisionNumber)
     {
 
-        // 全探索
-        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
-
-        foreach (Transform child in transformArray)
-        {
-
-            if (child.name == PartName)
-            {
-
-                try
-                {
-
-                    child.GetComponent<Collider>().enabled = true;
-
-                }
-                catch (System.Exception e)
-                {
-
-                    Debug.Log(e);
-
-                }
-
-                break;
-
-            }
-
-        }
+        AttackDecisions[AttackDecisionNumber].GetComponent<Collider>().enabled = true;
 
     }
 
     // 攻撃判定を消す
-    public void AttackEnd(string PartName)
+    public void AttackEnd(int AttackDecisionNumber)
     {
 
-        // 全探索
-        Transform[] transformArray = transform.GetComponentsInChildren<Transform>();
+        AttackDecisions[AttackDecisionNumber].GetComponent<Collider>().enabled = false;
 
-        foreach (Transform child in transformArray)
+    }
+
+    // 攻撃判定をすべて消す
+    private void AttackAllEnd()
+    {
+
+        foreach (Transform a in AttackDecisions)
         {
 
-            if (child.name == PartName)
-            {
+            Collider c = a.GetComponent<Collider>();
 
-                try
-                {
-
-                    child.GetComponent<Collider>().enabled = false;
-
-                }
-                catch (System.Exception e)
-                {
-
-                    Debug.Log(e);
-
-                }
-
-                break;
-
-            }
+            if (c) c.enabled = false;
+            else Debug.Log(a.name + " に Collider がアタッチされていないよ！");
 
         }
 
     }
 
-    // Stateをアニメーションイベントから操作
+    // StateをMoveにする(アニメーションイベントから行う)
     public void SetMoveState()
     {
 
@@ -309,12 +299,12 @@ public class ElementScript : MonoBehaviour
     {
         if (HPGTrigger == true)
         {
-            a.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1); // locScaleでgameObjのx軸スケールを変更
+            HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1); // locScaleでgameObjのx軸スケールを変更
         }
 
-        if (a.transform.localScale.x < 0)
+        if (HPGauge.transform.localScale.x < 0)
         {
-            a.transform.localScale = new Vector3(0, 1, 1);
+            HPGauge.transform.localScale = new Vector3(0, 1, 1);
         }
 
         Debug.Log("Scale is Changed.");
