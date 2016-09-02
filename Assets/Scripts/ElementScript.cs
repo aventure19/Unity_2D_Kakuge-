@@ -23,8 +23,11 @@ public class ElementScript : MonoBehaviour
     // 各攻撃判定
     public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
 
-    // 敵の位置
+    // 自分と敵の位置
+    public Vector3 vPlayer;
     public Transform Enemy;
+    public GameObject EnemyObj;
+    private ElementScript Ees;
 
     // 状態
     private enum State
@@ -45,21 +48,39 @@ public class ElementScript : MonoBehaviour
     [SerializeField]
     private Vector3 moveDirection;
 
+    //時間制御のデータ
+    private float Now = 0.0f;
+    private float TimeElapsed = 0.0f;
+    private bool NowTrigger = true;
+
+    //攻撃の持つデータ
+    [SerializeField]
+    private string AttackType = null;   //攻撃の詳細な名前 「Jab」「Kick」等
+    [SerializeField]
+    private string AttackEffection = null;  //攻撃が相手に当たったときの効果 「L_Bend(小仰け反り)」、「GroundFall(こける)」、「TurnUp(上を向いて仰け反る)」等
+    [SerializeField]
+    private int AttackDamage = 0; //攻撃の持つダメージ
+
     // Use this for initialization
     void Start()
     {
         //デフォルトのHPを格納
         DefaultHP = HP;
 
+        vPlayer = this.transform.position;
+
         // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+
+        Ees = Enemy.GetComponent<ElementScript>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
 
         // HPの変更処理(yキーでテスト可能)
         if (Input.GetKeyDown("y"))
@@ -183,6 +204,8 @@ public class ElementScript : MonoBehaviour
 
         }
 
+        AttackTypeConfig();
+
         // 移動確定
         controller.Move(moveDirection * Speed * Time.deltaTime);
 
@@ -239,6 +262,8 @@ public class ElementScript : MonoBehaviour
     // 攻撃を受けたときに呼ばれるメソッド
     public void isHited()
     {
+
+        HPGuageConfiguration(true);
 
         // ジャンプ中に攻撃を受けたとき
         if (state == State.Jump) animator.SetBool("Jump", false);
@@ -297,6 +322,9 @@ public class ElementScript : MonoBehaviour
     // ゲージの長さを調節する(yキーでテスト可能)
     public void HPGuageConfiguration(bool HPGTrigger)
     {
+
+        HP -= Ees.AttackDamage;
+
         if (HPGTrigger == true)
         {
             HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1); // locScaleでgameObjのx軸スケールを変更
@@ -312,4 +340,92 @@ public class ElementScript : MonoBehaviour
         HPGTrigger = false;
     }
 
+    /****通り抜けないようにするメソッド(未完成)
+    public void PositionConfiguration()
+    {
+        if ((Vector2.Distance(this.gameObject.transform.position, EnemyObj.transform.position) < 1.2f))
+        {
+            if (this.gameObject.transform.position.x < EnemyObj.transform.position.x)
+            {
+                vPlayer.x -= 0.1f;
+            }
+            else
+            {
+                vPlayer.x += 0.1f;
+            }
+        }
+    }
+    ******************************************/
+
+    //DamageDownから時間経過で強制的に立たせるメソッド(DamageDownにアタッチ済)
+    public void ForciblyStanding()
+    {
+
+        animator.SetTrigger("Headspring");
+    }
+
+    // 攻撃判定の有無からダメージ等の諸変数を決定する
+    public void AttackTypeConfig()
+    {
+
+        SphereCollider sc = GetComponent<SphereCollider>();
+        BoxCollider bc = GetComponent<BoxCollider>();
+        CapsuleCollider cc = GetComponent<CapsuleCollider>();
+        Collider c = GetComponent<Collider>();
+
+        // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
+
+
+        if (AttackDecisions[0]) //頭部パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[1]) //胴体パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[2]) //右ひじパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[3]) //右手パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[4]) //左ひじパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[5].GetComponent<Collider>().enabled == true) //左手パーツによる攻撃
+        {
+            AttackEffection = "L_Bend";
+            AttackDamage = 30;
+        }
+
+        if (AttackDecisions[6]) //右ひざパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[7].GetComponent<Collider>().enabled == true) //右足パーツによる攻撃
+        {
+            AttackEffection = "H_Bend";
+            AttackDamage = 60;
+        }
+
+        if (AttackDecisions[8]) //左ひざパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[9]) //左足パーツによる攻撃
+        {
+
+        }
+    }
 }
