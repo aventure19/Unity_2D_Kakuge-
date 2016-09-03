@@ -1573,6 +1573,7 @@ MonoBehaviour:
   - {fileID: 4000012927579316}
   - {fileID: 4000013578766400}
   Enemy: {fileID: 0}
+  Tobidougu: {fileID: 1000013884100234, guid: 47b2e90fb75ad1e449588d5b1709cbd4, type: 2}
   state: 0
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!114 &114000012667894574

@@ -114,6 +114,7 @@ public class ElementScript : MonoBehaviour
                     // 飛び道具(仮)
                     GameObject target = Instantiate(Tobidougu, transform.position + Vector3.up, Quaternion.identity) as GameObject;
                     target.GetComponent<AttackDecisionScript>().PlayerNum = PlayerNumber;
+                    target.GetComponent<MissileScript>().moveDirection = transform.forward;
 
                 }
 
