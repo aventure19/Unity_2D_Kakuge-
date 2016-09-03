@@ -4,7 +4,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CharacterController))]
-public class ElementScript : MonoBehaviour
+public class ElementScriptOld : MonoBehaviour
 {
 
     // inspectorで編集可能なフィールド
@@ -16,16 +16,18 @@ public class ElementScript : MonoBehaviour
     // HP等諸変数
     public int HP = 1000;
     public int DefaultHP = 1000;
+
+    // HPbar
     public Image HPGauge;
 
     // 各攻撃判定
     public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
 
     // 自分と敵の位置
+    public Vector3 vPlayer;
     public Transform Enemy;
-
-    // 飛び道具(仮)
-    public GameObject Tobidougu;
+    public GameObject EnemyObj;
+    private ElementScriptOld Ees;
 
     // 状態
     private enum State
@@ -46,19 +48,50 @@ public class ElementScript : MonoBehaviour
     [SerializeField]
     private Vector3 moveDirection;
 
+    //時間制御のデータ
+    private float Now = 0.0f;
+    private float TimeElapsed = 0.0f;
+    private bool NowTrigger = true;
+
+    //攻撃の持つデータ
+    [SerializeField]
+    private string AttackType = null;   //攻撃の詳細な名前 「Jab」「Kick」等
+    [SerializeField]
+    private string AttackEffection = null;  //攻撃が相手に当たったときの効果 「L_Bend(小仰け反り)」、「GroundFall(こける)」、「TurnUp(上を向いて仰け反る)」等
+    public int AttackDamage = 0; //攻撃の持つダメージ
+
     // Use this for initialization
     void Start()
     {
+        //デフォルトのHPを格納
+        DefaultHP = HP;
+
+        vPlayer = this.transform.position;
 
         // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
+
+        Ees = Enemy.GetComponent<ElementScriptOld>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+        // HPの変更処理(yキーでテスト可能)
+        if (Input.GetKeyDown("y"))
+        {
+            Debug.Log("y pressed.");
+            HP -= 20;
+            Debug.Log("HP is Changed");
+
+            HPGuageConfiguration(true);
+        }
+
+        if (HP < 0) HP = 0;
 
         // stateの値をもとに状態遷移
         switch (state)
@@ -105,15 +138,6 @@ public class ElementScript : MonoBehaviour
                     animator.SetBool("Jump", true);
 
                     state = State.Jump;
-
-                }
-
-                else if (Input.GetButtonDown("Fire3 " + PlayerNumber))
-                {
-
-                    // 飛び道具(仮)
-                    GameObject target = Instantiate(Tobidougu, transform.position + Vector3.up, Quaternion.identity) as GameObject;
-                    target.GetComponent<AttackDecisionScript>().PlayerNum = PlayerNumber;
 
                 }
 
@@ -179,6 +203,8 @@ public class ElementScript : MonoBehaviour
 
         }
 
+        AttackTypeConfig();
+
         // 移動確定
         controller.Move(moveDirection * Speed * Time.deltaTime);
 
@@ -187,10 +213,11 @@ public class ElementScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.tag == "Attack")
+        // 自分の攻撃には反応しない
+        if (other.tag == "Attack" && other.transform.root != transform)
         {
 
-            isHited(other);
+            isHited();
 
         }
 
@@ -232,21 +259,10 @@ public class ElementScript : MonoBehaviour
     }
 
     // 攻撃を受けたときに呼ばれるメソッド
-    public void isHited(Collider other)
+    public void isHited()
     {
 
-        // Damage
-        AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
-
-        if (t.PlayerNum == PlayerNumber) return;
-
-        HP -= t.Damage;
-
-        // HPが0未満なら0に戻す
-        if (HP < 0) HP = 0;
-
-        // locScaleでgameObjのx軸スケールを変更
-        HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1);
+        HPGuageConfiguration(true);
 
         // ジャンプ中に攻撃を受けたとき
         if (state == State.Jump) animator.SetBool("Jump", false);
@@ -263,36 +279,10 @@ public class ElementScript : MonoBehaviour
     }
 
     // 攻撃判定を作る
-    public void AttackStart(string AttackDecisionNumberAndDamage)
+    public void AttackStart(int AttackDecisionNumber)
     {
 
-        // スペースで区切って第一引数にAttackDecisionsを第二引数にDamageを渡す
-        string[] s = AttackDecisionNumberAndDamage.Split(' ');
-
-        int AttackDecisionNumber = int.Parse(s[0]);
-
-        Transform target = AttackDecisions[AttackDecisionNumber];
-
-        // AttackDecisionScriptが無ければAttach
-        if (target.GetComponent<AttackDecisionScript>() == null) target.gameObject.AddComponent<AttackDecisionScript>();
-
-        AttackDecisionScript t = target.GetComponent<AttackDecisionScript>();
-
-        t.PlayerNum = PlayerNumber;
-
-        try
-        {
-            int Damage = int.Parse(s[1]);
-            t.Damage = Damage;
-        }
-        catch (System.IndexOutOfRangeException e)
-        {
-            Debug.Log("第二引数がありません");
-            Debug.Log(e);
-        }
-
-        // 攻撃判定をenable
-        target.GetComponent<Collider>().enabled = true;
+        AttackDecisions[AttackDecisionNumber].GetComponent<Collider>().enabled = true;
 
     }
 
@@ -328,12 +318,43 @@ public class ElementScript : MonoBehaviour
 
     }
 
-    public void PositionConfiguration()
+    // ゲージの長さを調節する(yキーでテスト可能)
+    public void HPGuageConfiguration(bool HPGTrigger)
     {
 
+        HP -= Ees.AttackDamage;
 
+        if (HPGTrigger == true)
+        {
+            HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1); // locScaleでgameObjのx軸スケールを変更
+        }
 
+        if (HPGauge.transform.localScale.x < 0)
+        {
+            HPGauge.transform.localScale = new Vector3(0, 1, 1);
+        }
+
+        Debug.Log("Scale is Changed.");
+
+        HPGTrigger = false;
     }
+
+    /****通り抜けないようにするメソッド(未完成)
+    public void PositionConfiguration()
+    {
+        if ((Vector2.Distance(this.gameObject.transform.position, EnemyObj.transform.position) < 1.2f))
+        {
+            if (this.gameObject.transform.position.x < EnemyObj.transform.position.x)
+            {
+                vPlayer.x -= 0.1f;
+            }
+            else
+            {
+                vPlayer.x += 0.1f;
+            }
+        }
+    }
+    ******************************************/
 
     //DamageDownから時間経過で強制的に立たせるメソッド(DamageDownにアタッチ済)
     public void ForciblyStanding()
@@ -342,4 +363,68 @@ public class ElementScript : MonoBehaviour
         animator.SetTrigger("Headspring");
     }
 
+    // 攻撃判定の有無からダメージ等の諸変数を決定する
+    public void AttackTypeConfig()
+    {
+
+        SphereCollider sc = GetComponent<SphereCollider>();
+        BoxCollider bc = GetComponent<BoxCollider>();
+        CapsuleCollider cc = GetComponent<CapsuleCollider>();
+        Collider c = GetComponent<Collider>();
+
+        // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
+
+
+        if (AttackDecisions[0]) //頭部パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[1]) //胴体パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[2]) //右ひじパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[3]) //右手パーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[4]) //左ひじパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[5].GetComponent<Collider>().enabled == true) //左手パーツによる攻撃
+        {
+            AttackEffection = "L_Bend";
+            AttackDamage = 30;
+        }
+
+        if (AttackDecisions[6]) //右ひざパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[7].GetComponent<Collider>().enabled == true) //右足パーツによる攻撃
+        {
+            AttackEffection = "H_Bend";
+            AttackDamage = 60;
+        }
+
+        if (AttackDecisions[8]) //左ひざパーツによる攻撃
+        {
+
+        }
+
+        if (AttackDecisions[9]) //左足パーツによる攻撃
+        {
+
+        }
+    }
 }

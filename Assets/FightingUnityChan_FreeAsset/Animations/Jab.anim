@@ -65197,11 +65197,10 @@ AnimationClip:
   m_Events:
   - time: 0.1
     functionName: AttackStart
-    data: hand.L
-    objectReferenceParameter: {fileID: 1000013967696070, guid: d8adecd2c4787754e8c49d4a6fb7f051,
-      type: 2}
+    data: 5 30
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 5
+    intParameter: 0
     messageOptions: 0
   - time: 0.18333334
     functionName: AttackEnd
