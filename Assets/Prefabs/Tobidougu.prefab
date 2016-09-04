@@ -202,6 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 50
+  AttackEffection: 1
+  HitBack: 1
   PlayerNum: 0
 --- !u!114 &114000013559864638
 MonoBehaviour:

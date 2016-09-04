@@ -17,6 +17,7 @@ public class ElementScript : MonoBehaviour
     public int HP = 1000;
     public int DefaultHP = 1000;
     public Image HPGauge;
+    public int HitBackVector;
 
     // 各攻撃判定
     public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
@@ -31,6 +32,7 @@ public class ElementScript : MonoBehaviour
     private enum State
     {
         Move,
+        Damage,
         Jump,
         DuringAttack,
         DamageDown
@@ -76,6 +78,7 @@ public class ElementScript : MonoBehaviour
                 animator.SetFloat("Speed", Mathf.Abs(moveDirection.x));
 
                 // 状態遷移
+
                 if (Input.GetButtonDown("Fire1 " + PlayerNumber))
                 {
 
@@ -119,7 +122,6 @@ public class ElementScript : MonoBehaviour
                 }
 
                 break;
-
 
             case State.Jump:
 
@@ -236,6 +238,14 @@ public class ElementScript : MonoBehaviour
     public void isHited(Collider other)
     {
 
+        //ヒットバックのベクトルの係数を自キャラの向きから初期化        
+        if (this.transform.localEulerAngles.y == 90)
+            HitBackVector = 1;
+        else
+        {
+            HitBackVector = -1;
+        }
+
         // Damage
         AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
 
@@ -246,20 +256,37 @@ public class ElementScript : MonoBehaviour
         // HPが0未満なら0に戻す
         if (HP < 0) HP = 0;
 
-        // locScaleでgameObjのx軸スケールを変更
+        // locScaleでHPゲージのx軸スケールを変更
         HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1);
 
         // ジャンプ中に攻撃を受けたとき
         if (state == State.Jump) animator.SetBool("Jump", false);
 
-        animator.Play("DamageDown");
+        if (t.AttackEffection == 1)
+        {
+
+        }
+
+        if (t.AttackEffection == 2)
+        {
+            animator.Play("DamageDown");
+
+            state = State.DamageDown;
+        }
+        else
+        {
+            Debug.Log("設定されていない第三引数が使われています : Enemy,AttackEffection : " + t.AttackEffection);
+        }
+
+        //ヒットバックの生成
+        this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
 
         moveDirection.x = 0;
 
         // 攻撃判定をすべて消す
         AttackAllEnd();
 
-        state = State.DamageDown;
+
 
     }
 
@@ -268,6 +295,12 @@ public class ElementScript : MonoBehaviour
     {
 
         // スペースで区切って第一引数にAttackDecisionsを第二引数にDamageを渡す
+
+        /********第三引数に相手に与える仰け反り効果を記述
+                    1:小仰け反り(L_Kurai), 2:DamageDown, ～      ********/
+
+        //第四引数にヒットバックをfloat型で記述
+
         string[] s = AttackDecisionNumberAndDamage.Split(' ');
 
         int AttackDecisionNumber = int.Parse(s[0]);
@@ -289,6 +322,28 @@ public class ElementScript : MonoBehaviour
         catch (System.IndexOutOfRangeException e)
         {
             Debug.Log("第二引数がありません");
+            Debug.Log(e);
+        }
+
+        try
+        {
+            int AttackEffection = int.Parse(s[2]);
+            t.AttackEffection = AttackEffection;
+        }
+        catch (System.IndexOutOfRangeException e)
+        {
+            Debug.Log("第三引数がありません");
+            Debug.Log(e);
+        }
+
+        try
+        {
+            float HitBack = float.Parse(s[3]);
+            t.HitBack = HitBack;
+        }
+        catch (System.IndexOutOfRangeException e)
+        {
+            Debug.Log("第四引数がありません");
             Debug.Log(e);
         }
 

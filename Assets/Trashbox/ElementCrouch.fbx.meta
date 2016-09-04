@@ -1,0 +1,1116 @@
+fileFormatVersion: 2
+guid: 0e54468b82b3c0947a63eae88e68acce
+timeCreated: 1472988900
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: arm_lower.L
+    100002: arm_lower.R
+    100004: arm_upper.L
+    100006: arm_upper.R
+    100008: Armature.001
+    100010: back
+    100012: chest
+    100014: elbow_IK.L
+    100016: elbow_IK.L_end
+    100018: elbow_IK.L_end_end
+    100020: elbow_IK.R
+    100022: elbow_IK.R_end
+    100024: elbow_IK.R_end_end
+    100026: //RootNode
+    100028: foot.L
+    100030: foot.R
+    100032: foot_IK.L
+    100034: foot_IK.L_end
+    100036: foot_IK.L_end_end
+    100038: foot_IK.R
+    100040: foot_IK.R_end
+    100042: foot_IK.R_end_end
+    100044: hand.L
+    100046: hand.L_end
+    100048: hand.L_end_end
+    100050: hand.R
+    100052: hand.R_end
+    100054: hand.R_end_end
+    100056: hand_IK.L
+    100058: hand_IK.L_end
+    100060: hand_IK.L_end_end
+    100062: hand_IK.R
+    100064: hand_IK.R_end
+    100066: hand_IK.R_end_end
+    100068: head
+    100070: head_end
+    100072: head_end_end
+    100074: Hemi
+    100076: Hemi.001
+    100078: hip
+    100080: hips_root
+    100082: knee_IK.L
+    100084: knee_IK.L_end
+    100086: knee_IK.L_end_end
+    100088: knee_IK.R
+    100090: knee_IK.R_end
+    100092: knee_IK.R_end_end
+    100094: leg_lower.L
+    100096: leg_lower.R
+    100098: leg_upper.L
+    100100: leg_upper.R
+    100102: Mesh.001
+    100104: neck
+    100106: root
+    100108: shoulder.L
+    100110: shoulder.R
+    100112: toe.L
+    100114: toe.L_end
+    100116: toe.L_end_end
+    100118: toe.R
+    100120: toe.R_end
+    100122: toe.R_end_end
+    400000: arm_lower.L
+    400002: arm_lower.R
+    400004: arm_upper.L
+    400006: arm_upper.R
+    400008: Armature.001
+    400010: back
+    400012: chest
+    400014: elbow_IK.L
+    400016: elbow_IK.L_end
+    400018: elbow_IK.L_end_end
+    400020: elbow_IK.R
+    400022: elbow_IK.R_end
+    400024: elbow_IK.R_end_end
+    400026: //RootNode
+    400028: foot.L
+    400030: foot.R
+    400032: foot_IK.L
+    400034: foot_IK.L_end
+    400036: foot_IK.L_end_end
+    400038: foot_IK.R
+    400040: foot_IK.R_end
+    400042: foot_IK.R_end_end
+    400044: hand.L
+    400046: hand.L_end
+    400048: hand.L_end_end
+    400050: hand.R
+    400052: hand.R_end
+    400054: hand.R_end_end
+    400056: hand_IK.L
+    400058: hand_IK.L_end
+    400060: hand_IK.L_end_end
+    400062: hand_IK.R
+    400064: hand_IK.R_end
+    400066: hand_IK.R_end_end
+    400068: head
+    400070: head_end
+    400072: head_end_end
+    400074: Hemi
+    400076: Hemi.001
+    400078: hip
+    400080: hips_root
+    400082: knee_IK.L
+    400084: knee_IK.L_end
+    400086: knee_IK.L_end_end
+    400088: knee_IK.R
+    400090: knee_IK.R_end
+    400092: knee_IK.R_end_end
+    400094: leg_lower.L
+    400096: leg_lower.R
+    400098: leg_upper.L
+    400100: leg_upper.R
+    400102: Mesh.001
+    400104: neck
+    400106: root
+    400108: shoulder.L
+    400110: shoulder.R
+    400112: toe.L
+    400114: toe.L_end
+    400116: toe.L_end_end
+    400118: toe.R
+    400120: toe.R_end
+    400122: toe.R_end_end
+    4300000: Mesh.001
+    7400000: Armature.001|Armature.001|Armature|Idle|Armature|Idle
+    7400002: Armature.001|Armature.001|Armature|Jump|Armature|Jump
+    7400004: Armature.001|Armature.001|Armature|Walk|Armature|Walk
+    7400006: Armature.001|Idle
+    7400008: Armature.001|Jump
+    7400010: Armature.001|Walk
+    9500000: //RootNode
+    13700000: Mesh.001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature.001|Armature.001|Armature|Idle|Armature|Idle
+      takeName: Armature.001|Armature.001|Armature|Idle|Armature|Idle
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|Armature.001|Armature|Jump|Armature|Jump
+      takeName: Armature.001|Armature.001|Armature|Jump|Armature|Jump
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|Armature.001|Armature|Walk|Armature|Walk
+      takeName: Armature.001|Armature.001|Armature|Walk|Armature|Walk
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|Idle
+      takeName: Armature.001|Idle
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|Jump
+      takeName: Armature.001|Jump
+      firstFrame: 0
+      lastFrame: 10
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature.001|Walk
+      takeName: Armature.001|Walk
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature.001
+        weight: 1
+      - path: Armature.001/root
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.L/elbow_IK.L_end/elbow_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end
+        weight: 1
+      - path: Armature.001/root/elbow_IK.R/elbow_IK.R_end/elbow_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.L/foot_IK.L_end/foot_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end
+        weight: 1
+      - path: Armature.001/root/foot_IK.R/foot_IK.R_end/foot_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.L/hand_IK.L_end/hand_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end
+        weight: 1
+      - path: Armature.001/root/hand_IK.R/hand_IK.R_end/hand_IK.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root
+        weight: 1
+      - path: Armature.001/root/hips_root/hip
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/neck/head/head_end/head_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.L/arm_upper.L/arm_lower.L/hand.L/hand.L_end/hand.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/back/chest/shoulder.R/arm_upper.R/arm_lower.R/hand.R/hand.R_end/hand.R_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.L/leg_lower.L/foot.L/toe.L/toe.L_end/toe.L_end_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end
+        weight: 1
+      - path: Armature.001/root/hips_root/hip/leg_upper.R/leg_lower.R/foot.R/toe.R/toe.R_end/toe.R_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.L/knee_IK.L_end/knee_IK.L_end_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end
+        weight: 1
+      - path: Armature.001/root/knee_IK.R/knee_IK.R_end/knee_IK.R_end_end
+        weight: 1
+      - path: Hemi
+        weight: 1
+      - path: Hemi.001
+        weight: 1
+      - path: Mesh.001
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
