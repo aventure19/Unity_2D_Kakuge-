@@ -204,7 +204,7 @@ public class ElementScript : MonoBehaviour
     {
 
         // キャラクターの中心からレイを下方向に飛ばし、地面に設置しているかどうかを調べる
-        if (Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), 1f)) return true;
+        if (Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), 1f, 1 << LayerMask.NameToLayer("LandScape"))) return true;
 
         return false;
 
