@@ -33,6 +33,7 @@ public class ElementScript : MonoBehaviour
     {
         Move,
         Damage,
+        Crouch,
         Jump,
         DuringAttack,
         DamageDown
@@ -79,6 +80,13 @@ public class ElementScript : MonoBehaviour
 
                 // 状態遷移
 
+                if (Input.GetAxis("Vertical " + PlayerNumber) < 0)
+                {
+                    animator.SetBool("Crouch", true);
+
+                    state = State.Crouch;
+                }
+
                 if (Input.GetButtonDown("Fire1 " + PlayerNumber))
                 {
 
@@ -119,6 +127,17 @@ public class ElementScript : MonoBehaviour
                     target.GetComponent<AttackDecisionScript>().PlayerNum = PlayerNumber;
                     target.GetComponent<MissileScript>().moveDirection = transform.forward;
 
+                }
+
+                break;
+
+            case State.Crouch:
+
+                if(Input.GetAxis("Vertical " + PlayerNumber) >= 0)
+                {
+                    animator.SetBool("Crouch", false);
+
+                    state = State.Move;
                 }
 
                 break;
@@ -264,7 +283,7 @@ public class ElementScript : MonoBehaviour
 
         if (t.AttackEffection == 1)
         {
-
+            animator.Play("L_Kurai");
         }
 
         if (t.AttackEffection == 2)
