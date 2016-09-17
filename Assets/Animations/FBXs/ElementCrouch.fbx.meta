@@ -130,7 +130,7 @@ ModelImporter:
     400120: toe.R_end
     400122: toe.R_end_end
     4300000: Mesh.001
-    7400000: Armature.001|Armature.001|Armature|Idle|Armature|Idle
+    7400000: Crouch
     7400002: Armature.001|Armature.001|Armature|Jump|Armature|Jump
     7400004: Armature.001|Armature.001|Armature|Walk|Armature|Walk
     7400006: Armature.001|Idle
@@ -160,7 +160,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature.001|Armature.001|Armature|Idle|Armature|Idle
+      name: Crouch
       takeName: Armature.001|Armature.001|Armature|Idle|Armature|Idle
       firstFrame: 0
       lastFrame: 10
@@ -172,9 +172,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 1
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0

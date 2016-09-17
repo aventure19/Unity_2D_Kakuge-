@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Collider))]
 public class MissileScript : MonoBehaviour
 {
 
@@ -8,9 +9,13 @@ public class MissileScript : MonoBehaviour
 
     public Vector3 moveDirection = Vector3.right;
 
+    private Collider col;
+
     // Use this for initialization
     void Start()
     {
+
+        col = GetComponent<Collider>();
 
     }
 
@@ -19,6 +24,8 @@ public class MissileScript : MonoBehaviour
     {
 
         transform.Translate(moveDirection * speed * Time.deltaTime);
+
+        if (col.enabled == false || Physics.Raycast(transform.position, moveDirection, 0.5f, 1 << LayerMask.NameToLayer("LandScape"))) Destroy(gameObject);
 
     }
 

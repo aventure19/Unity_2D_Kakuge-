@@ -32,10 +32,10 @@ public class ElementScript : MonoBehaviour
     private enum State
     {
         Move,
-        Damage,
         Crouch,
         Jump,
         DuringAttack,
+        Damage,
         DamageDown
     }
 
@@ -129,15 +129,34 @@ public class ElementScript : MonoBehaviour
 
                 }
 
+                else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && Input.GetKeyDown("q"))
+                {
+                    moveDirection.x = 0;
+
+                    animator.Play("Hook");
+
+                    state = State.DuringAttack;
+
+                }
+
                 break;
 
             case State.Crouch:
 
-                if(Input.GetAxis("Vertical " + PlayerNumber) >= 0)
+                moveDirection.x = 0;
+
+                if (Input.GetAxis("Vertical " + PlayerNumber) >= 0)
                 {
                     animator.SetBool("Crouch", false);
 
                     state = State.Move;
+                }
+
+                else if (Input.GetKeyDown("q"))
+                {
+                    animator.Play("Daiashi");
+
+                    state = State.DuringAttack;
                 }
 
                 break;
@@ -167,6 +186,12 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+
+            case State.Damage:
+
+                // 何もしない
+
+                break;
 
             case State.DamageDown:
 
@@ -206,13 +231,20 @@ public class ElementScript : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
 
         if (other.tag == "Attack")
         {
 
-            isHited(other);
+            if (other.GetComponent<AttackDecisionScript>().PlayerNum != PlayerNumber)
+            {
+
+                isHited(other);
+
+                other.enabled = false;
+
+            }
 
         }
 
@@ -249,6 +281,7 @@ public class ElementScript : MonoBehaviour
         if (Input.GetButtonDown("Fire1 " + PlayerNumber) || Input.GetButtonDown("Fire2 " + PlayerNumber) || Input.GetButtonDown("Fire3 " + PlayerNumber) || Input.GetButtonDown("Jump " + PlayerNumber))
             return true;
 
+
         return false;
 
     }
@@ -267,8 +300,6 @@ public class ElementScript : MonoBehaviour
 
         // Damage
         AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
-
-        if (t.PlayerNum == PlayerNumber) return;
 
         HP -= t.Damage;
 
@@ -400,6 +431,27 @@ public class ElementScript : MonoBehaviour
     {
 
         state = State.Move;
+
+    }
+
+    // StateをCrouchにする(しゃがみ攻撃の後など)
+    public void SetCrouchState()
+    {
+        state = State.Crouch;
+    }
+
+    public void SetState(string goState)
+    {
+        switch (goState)
+        {
+
+            case "Damage":
+
+                state = State.Damage;
+
+                break;
+
+        }
 
     }
 
