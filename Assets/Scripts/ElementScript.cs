@@ -35,6 +35,7 @@ public class ElementScript : MonoBehaviour
         Crouch,
         Jump,
         DuringAttack,
+        DuringJumpAttack,
         Damage,
         DamageDown
     }
@@ -177,6 +178,13 @@ public class ElementScript : MonoBehaviour
                     moveDirection.y -= Gravity * Time.deltaTime;
                 }
 
+                if (Input.GetKeyDown("q"))
+                {
+                    animator.Play("JumpHeavyKick");
+
+                    state = State.DuringJumpAttack;
+                }
+
                 break;
 
 
@@ -186,6 +194,27 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+            case State.DuringJumpAttack:
+
+                animator.SetBool("Jump", false);
+
+                // 状態遷移
+                if (IsGrounded())
+                {
+
+                    AttackAllEnd();
+
+                    animator.Play("Move");
+
+                    state = State.Move;
+
+                }
+                else
+                {
+                    moveDirection.y -= Gravity * Time.deltaTime;
+                }
+
+                break;
 
             case State.Damage:
 
@@ -451,6 +480,11 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+            case "Jump":
+
+                state = State.Jump;
+
+                break;
         }
 
     }
