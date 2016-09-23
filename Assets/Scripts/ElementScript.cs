@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class ElementScript : MonoBehaviour
 {
 
@@ -45,7 +46,7 @@ public class ElementScript : MonoBehaviour
 
     // 各コンポーネント
     private Animator animator;
-    private CharacterController controller;
+    private Rigidbody rb;
 
     [SerializeField]
     private Vector3 moveDirection;
@@ -56,7 +57,14 @@ public class ElementScript : MonoBehaviour
 
         // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
-        controller = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
+
+    }
+
+    void FixedUpdate()
+    {
+
+        transform.position += new Vector3(moveDirection.x, 0, 0) * Speed * Time.deltaTime;
 
     }
 
@@ -112,7 +120,7 @@ public class ElementScript : MonoBehaviour
                 else if (Input.GetButtonDown("Jump " + PlayerNumber))
                 {
 
-                    moveDirection.y = JumpPower;
+                    rb.AddForce(Vector3.up * JumpPower);
 
                     animator.SetBool("Jump", true);
 
@@ -165,17 +173,13 @@ public class ElementScript : MonoBehaviour
             case State.Jump:
 
                 // 状態遷移
-                if (IsGrounded())
+                if (rb.velocity.y < 0 && IsGrounded())
                 {
 
                     animator.SetBool("Jump", false);
 
                     state = State.Move;
 
-                }
-                else
-                {
-                    moveDirection.y -= Gravity * Time.deltaTime;
                 }
 
                 if (Input.GetKeyDown("q"))
@@ -209,10 +213,6 @@ public class ElementScript : MonoBehaviour
                     state = State.Move;
 
                 }
-                else
-                {
-                    moveDirection.y -= Gravity * Time.deltaTime;
-                }
 
                 break;
 
@@ -235,15 +235,6 @@ public class ElementScript : MonoBehaviour
                     }
                 }
 
-                // 空中
-                else
-                {
-
-                    // 重力
-                    moveDirection.y -= Gravity * Time.deltaTime;
-
-                }
-
                 break;
 
 
@@ -254,9 +245,6 @@ public class ElementScript : MonoBehaviour
                 break;
 
         }
-
-        // 移動確定
-        controller.Move(moveDirection * Speed * Time.deltaTime);
 
     }
 
@@ -269,7 +257,7 @@ public class ElementScript : MonoBehaviour
             if (other.GetComponent<AttackDecisionScript>().PlayerNum != PlayerNumber)
             {
 
-                isHited(other);
+                isHitted(other);
 
                 other.enabled = false;
 
@@ -284,9 +272,7 @@ public class ElementScript : MonoBehaviour
     {
 
         // キャラクターの中心からレイを下方向に飛ばし、地面に設置しているかどうかを調べる
-        if (Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), 1f, 1 << LayerMask.NameToLayer("LandScape"))) return true;
-
-        return false;
+        return Physics.Raycast(new Ray(transform.position + Vector3.up, Vector3.down), 1f, 1 << LayerMask.NameToLayer("LandScape"));
 
     }
 
@@ -316,11 +302,11 @@ public class ElementScript : MonoBehaviour
     }
 
     // 攻撃を受けたときに呼ばれるメソッド
-    public void isHited(Collider other)
+    public void isHitted(Collider other)
     {
 
         //ヒットバックのベクトルの係数を自キャラの向きから初期化        
-        if (this.transform.localEulerAngles.y == 90)
+        if (transform.localEulerAngles.y == 90)
             HitBackVector = 1;
         else
         {
@@ -358,7 +344,8 @@ public class ElementScript : MonoBehaviour
         }
 
         //ヒットバックの生成
-        this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
+        // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
+        rb.AddForce(new Vector3(-HitBackVector, 1, 0) * 150f);
 
         moveDirection.x = 0;
 
