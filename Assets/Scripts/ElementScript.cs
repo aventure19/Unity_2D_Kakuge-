@@ -305,14 +305,6 @@ public class ElementScript : MonoBehaviour
     public void isHitted(Collider other)
     {
 
-        //ヒットバックのベクトルの係数を自キャラの向きから初期化        
-        if (transform.localEulerAngles.y == 90)
-            HitBackVector = 1;
-        else
-        {
-            HitBackVector = -1;
-        }
-
         // Damage
         AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
 
@@ -345,7 +337,7 @@ public class ElementScript : MonoBehaviour
 
         //ヒットバックの生成
         // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
-        rb.AddForce(new Vector3(-HitBackVector, 1, 0) * 150f);
+        rb.AddForce(new Vector3(-transform.forward.x, 1, 0) * 150f);
 
         moveDirection.x = 0;
 
