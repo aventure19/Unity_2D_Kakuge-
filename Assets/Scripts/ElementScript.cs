@@ -96,7 +96,7 @@ public class ElementScript : MonoBehaviour
                     state = State.Crouch;
                 }
 
-                if (Input.GetButtonDown("Fire1 " + PlayerNumber))
+                if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
 
                     moveDirection.x = 0;
@@ -106,7 +106,7 @@ public class ElementScript : MonoBehaviour
                     state = State.DuringAttack;
 
                 }
-                else if (Input.GetButtonDown("Fire2 " + PlayerNumber))
+                else if (Input.GetButtonDown("Tri " + PlayerNumber))
                 {
 
                     moveDirection.x = 0;
@@ -117,7 +117,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-                else if (Input.GetButtonDown("Jump " + PlayerNumber))
+                else if (Input.GetButton("Crs " + PlayerNumber))
                 {
 
                     rb.AddForce(Vector3.up * JumpPower);
@@ -128,7 +128,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-                else if (Input.GetButtonDown("Fire3 " + PlayerNumber))
+                else if (Input.GetButtonDown("R3 " + PlayerNumber))
                 {
 
                     // 飛び道具(仮)
@@ -138,7 +138,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-                else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && Input.GetKeyDown("q"))
+                else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
                 {
                     moveDirection.x = 0;
 
@@ -161,7 +161,7 @@ public class ElementScript : MonoBehaviour
                     state = State.Move;
                 }
 
-                else if (Input.GetKeyDown("q"))
+                else if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
                     animator.Play("Daiashi");
 
@@ -182,7 +182,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-                if (Input.GetKeyDown("q"))
+                if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
                     animator.Play("JumpHeavyKick");
 
@@ -293,8 +293,8 @@ public class ElementScript : MonoBehaviour
     private bool GetAnyButtonDown()
     {
 
-        if (Input.GetButtonDown("Fire1 " + PlayerNumber) || Input.GetButtonDown("Fire2 " + PlayerNumber) || Input.GetButtonDown("Fire3 " + PlayerNumber) || Input.GetButtonDown("Jump " + PlayerNumber))
-            return true;
+        //if (Input.GetButtonDown("Fire1 " + PlayerNumber) || Input.GetButtonDown("Fire2 " + PlayerNumber) || Input.GetButtonDown("Fire3 " + PlayerNumber) || Input.GetButtonDown("Jump " + PlayerNumber))
+        // return true;
 
 
         return false;
@@ -344,7 +344,7 @@ public class ElementScript : MonoBehaviour
         // 攻撃判定をすべて消す
         AttackAllEnd();
 
-
+        Debug.Log("hitted.");
 
     }
 
