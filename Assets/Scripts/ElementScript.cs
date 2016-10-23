@@ -25,6 +25,7 @@ public class ElementScript : MonoBehaviour
 
     // 自分と敵の位置
     public Transform Enemy;
+    public Mesh enemyMesh;
 
     // 飛び道具(仮)
     public GameObject Tobidougu;
@@ -38,7 +39,9 @@ public class ElementScript : MonoBehaviour
         DuringAttack,
         DuringJumpAttack,
         Damage,
-        DamageDown
+        DamageDown,
+        SGuard,
+        CGuard
     }
 
     [SerializeField]
@@ -63,8 +66,43 @@ public class ElementScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        /*
+        // Guardボタンを押しているか
+        if (Input.GetButton("Cir " + PlayerNumber))
+        {
+            state = State.SGuard;
+
+            animator.SetBool("isGuard", true);
+
+        }
+
+        else
+        {
+            state = State.Move;
+
+            animator.SetBool("isGuard", false); // animator.GetBool("isGuard");
+        }
+
+        // MoveからSGuardへの遷移
+        if (animator.GetBool("isGuard"))
+        {
+
+            state = State.SGuard;
+
+        }
+
+        // MoveからCGuardへの遷移
+        if (animator.GetBool("isGuard"))
+        {
+
+            state = State.CGuard;
+
+        }
+        */
 
         transform.position += new Vector3(moveDirection.x, 0, 0) * Speed * Time.deltaTime;
+
+        PositionConfiguration();
 
     }
 
@@ -95,6 +133,8 @@ public class ElementScript : MonoBehaviour
 
                     state = State.Crouch;
                 }
+
+
 
                 if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
@@ -131,10 +171,11 @@ public class ElementScript : MonoBehaviour
                 else if (Input.GetButtonDown("R3 " + PlayerNumber))
                 {
 
-                    // 飛び道具(仮)
-                    GameObject target = Instantiate(Tobidougu, transform.position + Vector3.up, Quaternion.identity) as GameObject;
-                    target.GetComponent<AttackDecisionScript>().PlayerNum = PlayerNumber;
-                    target.GetComponent<MissileScript>().moveDirection = transform.forward;
+                    moveDirection.x = 0;
+
+                    animator.Play("Hadou");
+
+                    state = State.DuringAttack;
 
                 }
 
@@ -161,7 +202,9 @@ public class ElementScript : MonoBehaviour
                     state = State.Move;
                 }
 
-                else if (Input.GetButtonDown("Squ " + PlayerNumber))
+
+
+                if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
                     animator.Play("Daiashi");
 
@@ -471,8 +514,26 @@ public class ElementScript : MonoBehaviour
     public void PositionConfiguration()
     {
 
+        if (Vector3.Distance(Enemy.position, this.transform.position) <= 1.0f)
+        {
 
+            if (Enemy.position.x >= this.transform.position.x)
+            {
+                this.transform.position = new Vector3(this.transform.position.x - 0.1f, this.transform.position.y, this.transform.position.z);
+            }
+            else
+            {
+                this.transform.position = new Vector3(this.transform.position.x + 0.1f, this.transform.position.y, this.transform.position.z);
+            }
+        }
+    }
 
+    public void Hadou()
+    {
+        // 飛び道具(仮)
+        GameObject target = Instantiate(Tobidougu, transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        target.GetComponent<AttackDecisionScript>().PlayerNum = PlayerNumber;
+        target.GetComponent<MissileScript>().moveDirection = transform.forward;
     }
 
     //DamageDownから時間経過で強制的に立たせるメソッド(DamageDownにアタッチ済)
