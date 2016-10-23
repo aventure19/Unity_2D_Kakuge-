@@ -24,8 +24,8 @@ public class ElementScript : MonoBehaviour
     public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
 
     // 自分と敵の位置
+    public Transform Player;
     public Transform Enemy;
-    public Mesh enemyMesh;
 
     // 飛び道具(仮)
     public GameObject Tobidougu;
@@ -33,6 +33,7 @@ public class ElementScript : MonoBehaviour
     // 状態
     private enum State
     {
+        // state
         Move,
         Crouch,
         Jump,
@@ -40,12 +41,18 @@ public class ElementScript : MonoBehaviour
         DuringJumpAttack,
         Damage,
         DamageDown,
+
+        // subState
+        muteki,
         SGuard,
-        CGuard
+        CGuard,
+        defo
     }
 
     [SerializeField]
     private State state;
+    [SerializeField]
+    private State subState;
 
     // 各コンポーネント
     private Animator animator;
@@ -66,11 +73,10 @@ public class ElementScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        /*
+
         // Guardボタンを押しているか
         if (Input.GetButton("Cir " + PlayerNumber))
         {
-            state = State.SGuard;
 
             animator.SetBool("isGuard", true);
 
@@ -78,27 +84,14 @@ public class ElementScript : MonoBehaviour
 
         else
         {
-            state = State.Move;
 
             animator.SetBool("isGuard", false); // animator.GetBool("isGuard");
-        }
-
-        // MoveからSGuardへの遷移
-        if (animator.GetBool("isGuard"))
-        {
-
-            state = State.SGuard;
 
         }
 
-        // MoveからCGuardへの遷移
-        if (animator.GetBool("isGuard"))
-        {
 
-            state = State.CGuard;
 
-        }
-        */
+
 
         // 壁にぶつかったらx方向の移動を0にする
         Vector3 dir = new Vector3(moveDirection.x, 0, 0);
@@ -144,61 +137,77 @@ public class ElementScript : MonoBehaviour
                     state = State.Crouch;
                 }
 
-
-
-                if (Input.GetButtonDown("Squ " + PlayerNumber))
+                // MoveからSGuardへの遷移
+                if (animator.GetBool("isGuard"))
                 {
 
-                    moveDirection.x = 0;
-
-                    animator.SetTrigger("Jab");
-
-                    state = State.DuringAttack;
+                    subState = State.SGuard;
 
                 }
-                else if (Input.GetButtonDown("Tri " + PlayerNumber))
+                if (subState != State.SGuard && subState != State.CGuard )
                 {
+                    if (Input.GetButtonDown("Squ " + PlayerNumber))
+                    {
 
-                    moveDirection.x = 0;
+                        moveDirection.x = 0;
 
-                    animator.SetTrigger("Kick");
+                        animator.SetTrigger("Jab");
 
-                    state = State.DuringAttack;
+                        state = State.DuringAttack;
 
+                    }
+                    else if (Input.GetButtonDown("Tri " + PlayerNumber))
+                    {
+
+                        moveDirection.x = 0;
+
+                        animator.SetTrigger("Kick");
+
+                        state = State.DuringAttack;
+
+                    }
+
+                    else if (Input.GetButton("Crs " + PlayerNumber))
+                    {
+
+                        rb.velocity = new Vector3(rb.velocity.x, JumpPower);
+
+                        animator.SetBool("Jump", true);
+
+                        state = State.Jump;
+
+                    }
+
+                    else if (Input.GetButtonDown("R3 " + PlayerNumber))
+                    {
+
+                        moveDirection.x = 0;
+
+                        animator.Play("Hadou");
+
+                        state = State.DuringAttack;
+
+                    }
+
+                    else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
+                    {
+                        moveDirection.x = 0;
+
+                        animator.Play("Hook");
+
+                        state = State.DuringAttack;
+
+                    }
+
+                    else if (Input.GetButton("R2 " + PlayerNumber))
+                    {
+                        moveDirection.x = 0;
+
+                        animator.Play("Nage");
+
+                        state = State.DuringAttack;
+                    }
                 }
-
-                else if (Input.GetButton("Crs " + PlayerNumber))
-                {
-
-                    rb.velocity = new Vector3(rb.velocity.x, JumpPower);
-
-                    animator.SetBool("Jump", true);
-
-                    state = State.Jump;
-
-                }
-
-                else if (Input.GetButtonDown("R3 " + PlayerNumber))
-                {
-
-                    moveDirection.x = 0;
-
-                    animator.Play("Hadou");
-
-                    state = State.DuringAttack;
-
-                }
-
-                else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
-                {
-                    moveDirection.x = 0;
-
-                    animator.Play("Hook");
-
-                    state = State.DuringAttack;
-
-                }
-
                 break;
 
             case State.Crouch:
@@ -212,7 +221,13 @@ public class ElementScript : MonoBehaviour
                     state = State.Move;
                 }
 
+                // CrouchからCGuardへの遷移
+                if (animator.GetBool("isGuard"))
+                {
 
+                    subState = State.CGuard;
+
+                }
 
                 if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
@@ -247,8 +262,6 @@ public class ElementScript : MonoBehaviour
 
 
             case State.DuringAttack:
-
-                // 何もしない
 
                 break;
 
@@ -287,6 +300,7 @@ public class ElementScript : MonoBehaviour
                         animator.SetTrigger("Headspring");
 
                     }
+
                 }
 
                 break;
@@ -298,6 +312,36 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+        }
+
+        // subStateによる分岐処理
+        switch (subState)
+        {
+            case State.SGuard:
+
+                moveDirection.x = 0;
+
+                break;
+
+            case State.CGuard:
+
+                moveDirection.x = 0;
+
+                break;
+
+            case State.muteki:
+
+                break;
+
+            case State.defo:
+
+                break;
+
+        }
+
+        if (!animator.GetBool("isGuard"))
+        {
+            subState = State.defo;
         }
 
     }
@@ -358,47 +402,77 @@ public class ElementScript : MonoBehaviour
     // 攻撃を受けたときに呼ばれるメソッド
     public void isHitted(Collider other)
     {
-
-        // Damage
-        AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
-
-        HP -= t.Damage;
-
-        // HPが0未満なら0に戻す
-        if (HP < 0) HP = 0;
-
-        // locScaleでHPゲージのx軸スケールを変更
-        HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1);
-
-        // ジャンプ中に攻撃を受けたとき
-        if (state == State.Jump) animator.SetBool("Jump", false);
-
-        if (t.AttackEffection == 1)
+        if (state == State.DamageDown)
         {
-            animator.Play("L_Kurai");
+            // 当たり判定がないとして何もしない
+        }
+        if(subState == State.SGuard || subState == State.CGuard)
+        {
+            // Damage
+            AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
+
+            HP -= t.Damage / 5;
+
+            // HPが0未満なら0に戻す
+            if (HP < 0) HP = 0;
+
+            // locScaleでHPゲージのx軸スケールを変更
+            HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1);
+
+            //ヒットバックの生成
+            // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
+            rb.AddForce(new Vector3(-transform.forward.x, 0, 0) * 100f);
+
+            moveDirection.x = 0;
+
+            // 攻撃判定をすべて消す
+            AttackAllEnd();
         }
 
-        if (t.AttackEffection == 2)
-        {
-            animator.Play("DamageDown");
-
-            state = State.DamageDown;
-        }
         else
         {
-            Debug.Log("設定されていない第三引数が使われています : Enemy,AttackEffection : " + t.AttackEffection);
+            // Damage
+            AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
+
+            HP -= t.Damage;
+
+            // HPが0未満なら0に戻す
+            if (HP < 0) HP = 0;
+
+            // locScaleでHPゲージのx軸スケールを変更
+            HPGauge.transform.localScale = new Vector3(((float)HP / (float)DefaultHP), 1, 1);
+
+            // ジャンプ中に攻撃を受けたとき
+            if (state == State.Jump) animator.SetBool("Jump", false);
+
+            if (t.AttackEffection == 1)
+            {
+                animator.Play("L_Kurai");
+            }
+
+            if (t.AttackEffection == 2)
+            {
+                animator.Play("DamageDown");
+
+                state = State.DamageDown;
+            }
+            else
+            {
+                Debug.Log("設定されていない第三引数が使われています : Enemy,AttackEffection : " + t.AttackEffection);
+            }
+
+            //ヒットバックの生成
+            // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
+            rb.AddForce(new Vector3(-transform.forward.x, 0, 0) * 150f);
+
+            moveDirection.x = 0;
+
+            // 攻撃判定をすべて消す
+            AttackAllEnd();
+
+            Debug.Log("hitted.");
+
         }
-
-        //ヒットバックの生成
-        // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
-        rb.AddForce(new Vector3(-transform.forward.x, 1, 0) * 150f);
-
-        moveDirection.x = 0;
-
-        // 攻撃判定をすべて消す
-        AttackAllEnd();
-
-        Debug.Log("hitted.");
 
     }
 
