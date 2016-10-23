@@ -493,7 +493,7 @@ Prefab:
     - target: {fileID: 114000012574686300, guid: d8adecd2c4787754e8c49d4a6fb7f051,
         type: 2}
       propertyPath: JumpPower
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114000012574686300, guid: d8adecd2c4787754e8c49d4a6fb7f051,
         type: 2}
@@ -1054,6 +1054,11 @@ Prefab:
     - target: {fileID: 4000011965179212, guid: d8adecd2c4787754e8c49d4a6fb7f051, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0.034851708
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012574686300, guid: d8adecd2c4787754e8c49d4a6fb7f051,
+        type: 2}
+      propertyPath: JumpPower
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d8adecd2c4787754e8c49d4a6fb7f051, type: 2}

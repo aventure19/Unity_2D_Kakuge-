@@ -100,6 +100,16 @@ public class ElementScript : MonoBehaviour
         }
         */
 
+        // 壁にぶつかったらx方向の移動を0にする
+        Vector3 dir = new Vector3(moveDirection.x, 0, 0);
+        if (Physics.CapsuleCast(transform.position + Vector3.up * 0.5f, transform.position + Vector3.up * 1.5f, 0.5f, dir, dir.sqrMagnitude * Speed * Time.deltaTime, 1 << LayerMask.NameToLayer("LandScape")))
+        {
+
+            moveDirection.x = 0;
+            Debug.Log("hello");
+
+        }
+
         transform.position += new Vector3(moveDirection.x, 0, 0) * Speed * Time.deltaTime;
 
         PositionConfiguration();
@@ -160,7 +170,7 @@ public class ElementScript : MonoBehaviour
                 else if (Input.GetButton("Crs " + PlayerNumber))
                 {
 
-                    rb.AddForce(Vector3.up * JumpPower);
+                    rb.velocity = new Vector3(rb.velocity.x, JumpPower);
 
                     animator.SetBool("Jump", true);
 
@@ -216,7 +226,7 @@ public class ElementScript : MonoBehaviour
             case State.Jump:
 
                 // 状態遷移
-                if (rb.velocity.y < 0 && IsGrounded())
+                if (rb.velocity.y < 0.1f && IsGrounded())
                 {
 
                     animator.SetBool("Jump", false);
@@ -225,6 +235,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
+                // 空中攻撃
                 if (Input.GetButtonDown("Squ " + PlayerNumber))
                 {
                     animator.Play("JumpHeavyKick");
