@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000012769087016}
   - 198: {fileID: 198000013638169402}
   - 199: {fileID: 199000010555826758}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - 4: {fileID: 4000010568160220}
   - 33: {fileID: 33000011230737520}
   - 23: {fileID: 23000012456204570}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - 4: {fileID: 4000012143561898}
   - 198: {fileID: 198000010522118916}
   - 199: {fileID: 199000011189992972}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - 135: {fileID: 135000011793243880}
   - 114: {fileID: 114000013559864638}
   - 114: {fileID: 114000013286370674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tobidougu
   m_TagString: Attack
   m_Icon: {fileID: 0}
@@ -218,6 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   moveDirection: {x: 1, y: 0, z: 0}
+  myAds: {fileID: 0}
+  enAds: {fileID: 0}
 --- !u!135 &135000011793243880
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -236,7 +238,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013511759692}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -274,12 +276,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1111302376
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 0
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1111302376
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -1979,7 +1982,7 @@ ParticleSystem:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010208123676}
-  serializedVersion: 2
+  serializedVersion: 4
   lengthInSec: 5
   startDelay:
     scalar: 0
@@ -2017,12 +2020,13 @@ ParticleSystem:
       m_RotationOrder: 4
     minMaxState: 0
   speed: 1
-  randomSeed: 1111302376
   looping: 1
   prewarm: 0
   playOnAwake: 1
   moveWithTransform: 1
+  autoRandomSeed: 0
   scalingMode: 1
+  randomSeed: 1111302376
   InitialModule:
     serializedVersion: 2
     enabled: 1

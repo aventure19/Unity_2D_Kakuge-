@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
@@ -22,6 +23,7 @@ public class ElementScript : MonoBehaviour
 
     // 各攻撃判定
     public Transform[] AttackDecisions = new Transform[10];  // 0:頭 1:体 2:右ひじ 3:右手 4:左ひじ 5:左手 6:右ひざ 7:右足 8:左ひざ 9:左足
+    public Transform[] Reach = new Transform[10]; // 0:右上腕 1:右肘下 2:左上腕 3:左肘下 4:右腿 5:右膝下 6:左腿 7:左膝下
 
     // 自分と敵の位置
     public Transform Player;
@@ -29,6 +31,9 @@ public class ElementScript : MonoBehaviour
 
     // 飛び道具(仮)
     public GameObject Tobidougu;
+
+    // 攻撃ヒット時に再生するエフェクト
+    public ParticleSystem ps;
 
     // 状態
     private enum State
@@ -57,7 +62,17 @@ public class ElementScript : MonoBehaviour
     // 各コンポーネント
     private Animator animator;
     private Rigidbody rb;
+    private AudioSource audio;
 
+    // audioで用いるAudioClip配列
+    // 0: 打撃ヒット 1: ガード
+    public AudioClip[] ac = new AudioClip[5];
+
+    // デバッグ用の各種データ
+    public TextMesh dTm;
+    public int dI = 0;
+
+    // 移動量
     [SerializeField]
     private Vector3 moveDirection;
 
@@ -68,6 +83,7 @@ public class ElementScript : MonoBehaviour
         // 各々のコンポーネントの取得
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
 
     }
 
@@ -89,6 +105,13 @@ public class ElementScript : MonoBehaviour
 
         }
 
+
+        if (state != State.DuringAttack)
+        {
+            dI = 0;
+
+            ReachAllDefault();
+        }
 
 
 
@@ -144,9 +167,9 @@ public class ElementScript : MonoBehaviour
                     subState = State.SGuard;
 
                 }
-                if (subState != State.SGuard && subState != State.CGuard )
+                if (subState != State.SGuard && subState != State.CGuard)
                 {
-                    if (Input.GetButtonDown("Squ " + PlayerNumber))
+                    if (Input.GetButtonDown("Squ " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) <= 0)
                     {
 
                         moveDirection.x = 0;
@@ -229,12 +252,20 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-                if (Input.GetButtonDown("Squ " + PlayerNumber))
-                {
-                    animator.Play("Daiashi");
 
-                    state = State.DuringAttack;
+                if (subState != State.SGuard && subState != State.CGuard)
+                {
+
+                    if (Input.GetButtonDown("Squ " + PlayerNumber))
+                    {
+                        animator.Play("Daiashi");
+
+                        state = State.DuringAttack;
+                    }
+
+
                 }
+
 
                 break;
 
@@ -261,7 +292,18 @@ public class ElementScript : MonoBehaviour
                 break;
 
 
+            // 攻撃中は何もしない
             case State.DuringAttack:
+
+                dI++;
+
+                if (dI > 180)
+                {
+
+                    animator.SetBool("Crouch", false);
+
+                    state = State.Move;
+                }
 
                 break;
 
@@ -291,17 +333,7 @@ public class ElementScript : MonoBehaviour
 
             case State.DamageDown:
 
-                // 地面
-                if (IsGrounded())
-                {
-                    if (GetAnyButtonDown() == true)
-                    {
-
-                        animator.SetTrigger("Headspring");
-
-                    }
-
-                }
+                // 何もしない
 
                 break;
 
@@ -387,15 +419,18 @@ public class ElementScript : MonoBehaviour
 
     }
 
-    // 何かボタンが押されていたらtrueを返すメソッド
-    private bool GetAnyButtonDown()
+    // 特定のタイミングの下入力で受け身を取るメソッド
+    public void GetUnder()
     {
 
-        //if (Input.GetButtonDown("Fire1 " + PlayerNumber) || Input.GetButtonDown("Fire2 " + PlayerNumber) || Input.GetButtonDown("Fire3 " + PlayerNumber) || Input.GetButtonDown("Jump " + PlayerNumber))
-        // return true;
+        // 地面
+        if (IsGrounded() && Input.GetAxis("Vertical " + PlayerNumber) < 0)
+        {
 
+                animator.SetTrigger("Headspring");
 
-        return false;
+        }
+
 
     }
 
@@ -406,7 +441,7 @@ public class ElementScript : MonoBehaviour
         {
             // 当たり判定がないとして何もしない
         }
-        if(subState == State.SGuard || subState == State.CGuard)
+        else if (subState == State.SGuard || subState == State.CGuard)
         {
             // Damage
             AttackDecisionScript t = other.GetComponent<AttackDecisionScript>();
@@ -424,6 +459,12 @@ public class ElementScript : MonoBehaviour
             rb.AddForce(new Vector3(-transform.forward.x, 0, 0) * 100f);
 
             moveDirection.x = 0;
+
+            // SEを再生
+            AudioPlay(1);
+
+            // ガードエフェクトを再生
+            EffectPlay(other, 0, 90, 255, 255);
 
             // 攻撃判定をすべて消す
             AttackAllEnd();
@@ -466,6 +507,12 @@ public class ElementScript : MonoBehaviour
             rb.AddForce(new Vector3(-transform.forward.x, 0, 0) * 150f);
 
             moveDirection.x = 0;
+
+            // SEを再生
+            AudioPlay(0);
+
+            // ヒットエフェクトを再生
+            EffectPlay(other, 255, 64, 64, 255);
 
             // 攻撃判定をすべて消す
             AttackAllEnd();
@@ -596,6 +643,7 @@ public class ElementScript : MonoBehaviour
 
     }
 
+    // 相手と重ならないように位置を調整する
     public void PositionConfiguration()
     {
 
@@ -613,6 +661,7 @@ public class ElementScript : MonoBehaviour
         }
     }
 
+    // 飛び道具を発射する
     public void Hadou()
     {
         // 飛び道具(仮)
@@ -621,11 +670,72 @@ public class ElementScript : MonoBehaviour
         target.GetComponent<MissileScript>().moveDirection = transform.forward;
     }
 
-    //DamageDownから時間経過で強制的に立たせるメソッド(DamageDownにアタッチ済)
+    // DamageDownから時間経過で強制的に立たせるメソッド(DamageDownにアタッチ済)
     public void ForciblyStanding()
     {
 
         animator.SetTrigger("Headspring");
+
+    }
+
+    // Audioを初期化して再生する
+    public void AudioPlay(int cNum)
+    {
+
+        audio.clip = ac[cNum];
+
+        audio.Play();
+
+    }
+
+    // 体のパーツの大きさを変更してリーチを変更
+    public void ReachChange(string Num)
+    {
+
+        string[] s = Num.Split(' ');
+
+        int PartsNum = int.Parse(s[0]);
+
+        float x = float.Parse(s[1]);
+
+        float y = float.Parse(s[2]);
+
+        Reach[PartsNum].localScale = new Vector3(x, y, 1);
+
+    }
+
+    // 指定したパーツのサイズを初期化
+    public void ReachDefault(int PartsNum)
+    {
+
+        Reach[PartsNum].localScale = new Vector3(1, 1, 1);
+
+    }
+
+    // 全てのパーツのサイズの初期化
+    public void ReachAllDefault()
+    {
+
+        try
+        {
+            foreach (Transform a in Reach)
+            {
+
+                a.localScale = new Vector3(1, 1, 1);
+
+            }
+        }
+        catch (NullReferenceException e)
+        {
+            // 何もしない
+        }
+    }
+
+    public void EffectPlay(Collider other, byte R, byte G, byte B, byte A)
+    {
+        ps.transform.gameObject.transform.position = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z);
+        ps.startColor = new Color32(R, G, B, A);
+        ps.Play();
     }
 
 }
