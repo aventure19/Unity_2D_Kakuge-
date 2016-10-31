@@ -10,6 +10,8 @@ public class AttackDecisionScript : MonoBehaviour
 
     public float HitBack = 0.0f;
 
+    public float HitBackY = 0.0f;
+
     public int PlayerNum = 0;
 
 }

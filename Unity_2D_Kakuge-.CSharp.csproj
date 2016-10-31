@@ -64,11 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Pose.cs" />
+    <Compile Include="Assets\ReturnToGame.cs" />
     <Compile Include="Assets\Scripts\AttackDecisionScript.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\ElementScript.cs" />
     <Compile Include="Assets\Scripts\FrameCounter.cs" />
     <Compile Include="Assets\Scripts\MissileScript.cs" />
+    <Compile Include="Assets\Scripts\SceneLoad.cs" />
     <Compile Include="Assets\Scripts\VisibleCollider.cs" />
     <Compile Include="Assets\Trashbox\ElementScriptOld.cs" />
     <Compile Include="Assets\Trashbox\ElementScript_old.cs" />

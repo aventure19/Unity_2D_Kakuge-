@@ -46,6 +46,7 @@ public class ElementScript : MonoBehaviour
         DuringJumpAttack,
         Damage,
         DamageDown,
+        KnockOut,
 
         // subState
         muteki,
@@ -60,9 +61,11 @@ public class ElementScript : MonoBehaviour
     private State subState;
 
     // 各コンポーネント
-    private Animator animator;
-    private Rigidbody rb;
+    public Animator animator;
+    public Rigidbody rb;
     private AudioSource audio;
+    // 敵のRigidBody
+    private Rigidbody enRb;
 
     // audioで用いるAudioClip配列
     // 0: 打撃ヒット 1: ガード
@@ -84,6 +87,8 @@ public class ElementScript : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
+
+        enRb = Enemy.gameObject.GetComponent<Rigidbody>();
 
     }
 
@@ -135,6 +140,11 @@ public class ElementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(HP <= 0)
+        {
+            state = State.KnockOut;
+        }
 
         // stateの値をもとに状態遷移
         switch (state)
@@ -201,7 +211,7 @@ public class ElementScript : MonoBehaviour
 
                     }
 
-                    else if (Input.GetButtonDown("R3 " + PlayerNumber))
+                    else if (Input.GetButtonDown("R3 " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) == 0)
                     {
 
                         moveDirection.x = 0;
@@ -210,6 +220,15 @@ public class ElementScript : MonoBehaviour
 
                         state = State.DuringAttack;
 
+                    }
+
+                    else if(Input.GetButtonDown("R3 " + PlayerNumber) && (Input.GetAxis("Horizontal " + PlayerNumber) >= 0 || Input.GetAxis("Horizontal " + PlayerNumber) <= 0))
+                    {
+                        moveDirection.x = 0;
+
+                        animator.Play("Tosshin");
+
+                        state = State.DuringAttack;
                     }
 
                     else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
@@ -337,6 +356,13 @@ public class ElementScript : MonoBehaviour
 
                 break;
 
+            case State.KnockOut:
+
+                moveDirection.x = 0;
+
+                animator.Play("KnockOut");
+
+                break;
 
             default:
 
@@ -406,6 +432,17 @@ public class ElementScript : MonoBehaviour
 
     }
 
+    // 画面端に到達しているか
+    private bool IsWall()
+    {
+        // キャラクターの中心からレイを後ろ方向に飛ばし、壁に設置しているかどうかを調べる
+        if (Physics.Raycast(new Ray(transform.position, -transform.forward), 1.0f, 1 << LayerMask.NameToLayer("LandScape")))
+        {
+            return true;
+        }
+        else { return false; } 
+    }
+
     // 敵の方向を向くメソッド
     private void LookAtEnemy()
     {
@@ -427,7 +464,7 @@ public class ElementScript : MonoBehaviour
         if (IsGrounded() && Input.GetAxis("Vertical " + PlayerNumber) < 0)
         {
 
-                animator.SetTrigger("Headspring");
+            animator.SetTrigger("Headspring");
 
         }
 
@@ -503,8 +540,20 @@ public class ElementScript : MonoBehaviour
             }
 
             //ヒットバックの生成
-            // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
-            rb.AddForce(new Vector3(-transform.forward.x, 0, 0) * 150f);
+            if (IsWall())
+            {
+                // 飛び道具でなければ
+                if (!other.GetComponent<MissileScript>())
+                {
+                    enRb.AddForce(new Vector3(transform.forward.x, 0, 0) * 150f);
+                    Debug.Log("Enemy AddForce.");
+                }
+            }
+            else
+            {
+                // this.transform.position = new Vector2(this.transform.position.x - t.HitBack * HitBackVector, this.transform.position.y);
+                rb.AddForce(new Vector3(-transform.forward.x * t.HitBack, t.HitBackY, 0) * 150f);
+            }
 
             moveDirection.x = 0;
 
@@ -577,6 +626,18 @@ public class ElementScript : MonoBehaviour
         catch (System.IndexOutOfRangeException e)
         {
             Debug.Log("第四引数がありません");
+            Debug.Log(e);
+        }
+
+        try
+        {
+            float HitBackY = float.Parse(s[4]);
+            t.HitBackY = HitBackY;
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            t.HitBackY = 0;
+            Debug.Log("第 5 引数がありません");
             Debug.Log(e);
         }
 
@@ -731,11 +792,38 @@ public class ElementScript : MonoBehaviour
         }
     }
 
+    // 視覚エフェクトを再生
     public void EffectPlay(Collider other, byte R, byte G, byte B, byte A)
     {
         ps.transform.gameObject.transform.position = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z);
         ps.startColor = new Color32(R, G, B, A);
         ps.Play();
+    }
+
+    public void moveDirConfiguration(string XY)
+    {
+        string[] s = XY.Split(' ');
+        try
+        {
+            float x = float.Parse(s[0]);
+            moveDirection.x = transform.forward.x;
+        }
+        catch(IndexOutOfRangeException e)
+        {
+
+        }
+
+        try
+        {
+            float y = float.Parse(s[1]);
+            moveDirection.y = y;
+        }
+        catch (IndexOutOfRangeException)
+        {
+
+        }
+
+
     }
 
 }
