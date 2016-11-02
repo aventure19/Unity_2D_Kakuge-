@@ -2,7 +2,8 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class SceneLoad : MonoBehaviour {
+public class SceneLoad : MonoBehaviour
+{
 
     public void Load(string Scene)
     {

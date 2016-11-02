@@ -21109,7 +21109,7 @@ AnimationClip:
     messageOptions: 0
   - time: 0.375
     functionName: AttackStart
-    data: 5 100 2 2.0
+    data: 5 100 2 2.0 0
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

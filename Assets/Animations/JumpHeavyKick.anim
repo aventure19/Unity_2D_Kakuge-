@@ -27995,7 +27995,7 @@ AnimationClip:
   m_Events:
   - time: 0.41666666
     functionName: AttackStart
-    data: 9 100 1 1.5
+    data: 9 100 1 1.5 0
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

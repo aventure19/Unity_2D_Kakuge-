@@ -135,7 +135,7 @@ public class Pose : MonoBehaviour
                             break;
                     }
 
-                    if(Input.anyKey || Input.GetButtonDown("Cir 1") || Input.GetButtonDown("Cir 2"))
+                    if (Input.anyKey || Input.GetButtonDown("Cir 1") || Input.GetButtonDown("Cir 2"))
                     {
                         sl.Load("ElementTitle");
                     }
@@ -153,7 +153,7 @@ public class Pose : MonoBehaviour
     private bool TimefromStart()
     {
 
-        if(Time.timeSinceLevelLoad < 3.0f)
+        if (Time.timeSinceLevelLoad < 3.0f)
         {
             Prepare.enabled = true;
         }
@@ -202,14 +202,14 @@ public class Pose : MonoBehaviour
 
 
             // どちらかのHPが0になったらゲームセット
-            if(es[0].HP <= 0 || es[1].HP <= 0)
+            if (es[0].HP <= 0 || es[1].HP <= 0)
             {
                 Invoke("GameTerminator", 5.0f);
 
                 KO.enabled = true;
 
                 Invoke("KODisEnabled", 5.0f);
-                
+
             }
 
 

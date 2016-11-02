@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ReturnToGame : MonoBehaviour {
+public class ReturnToGame : MonoBehaviour
+{
 
     Pose p;
-    public Camera c; 
+    public Camera c;
 
-	// Use this for initialization
-	public void ReturntoGame () {
+    // Use this for initialization
+    public void ReturntoGame()
+    {
 
         p = c.GetComponent<Pose>();
 
