@@ -86,12 +86,20 @@ public class ElementScript : MonoBehaviour
     {
 
         // 各々のコンポーネントの取得
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
+        if (GetComponent<Animator>())
+            animator = GetComponent<Animator>();
 
-        enRb = Enemy.gameObject.GetComponent<Rigidbody>();
-        enEs = Enemy.gameObject.GetComponent<ElementScript>();
+        if (GetComponent<Rigidbody>())
+            rb = GetComponent<Rigidbody>();
+
+        if (GetComponent<AudioSource>())
+            audio = GetComponent<AudioSource>();
+
+        if (Enemy)
+        {
+            enRb = Enemy.gameObject.GetComponent<Rigidbody>();
+            enEs = Enemy.gameObject.GetComponent<ElementScript>();
+        }
 
     }
 
@@ -180,9 +188,11 @@ public class ElementScript : MonoBehaviour
                     subState = State.SGuard;
 
                 }
+
+                // ガード状態でなければ
                 if (subState != State.SGuard && subState != State.CGuard)
                 {
-                    if (Input.GetButtonDown("Squ " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) <= 0)
+                    if (Input.GetButtonDown("Squ " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) == 0 && Input.GetAxis("Vertical " + PlayerNumber) == 0)
                     {
 
                         moveDirection.x = 0;
@@ -192,7 +202,7 @@ public class ElementScript : MonoBehaviour
                         state = State.DuringAttack;
 
                     }
-                    else if (Input.GetButtonDown("Tri " + PlayerNumber))
+                    else if (Input.GetButtonDown("Squ " + PlayerNumber) && Input.GetAxis("Vertical " + PlayerNumber) > 0)
                     {
 
                         moveDirection.x = 0;
@@ -214,7 +224,7 @@ public class ElementScript : MonoBehaviour
 
                     }
 
-                    else if (Input.GetButtonDown("R3 " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) == 0 && Input.GetAxis("Vertical " + PlayerNumber) == 0)
+                    else if (Input.GetButtonDown("Tri " + PlayerNumber) && Input.GetAxis("Horizontal " + PlayerNumber) == 0 && Input.GetAxis("Vertical " + PlayerNumber) == 0)
                     {
 
                         moveDirection.x = 0;
@@ -225,7 +235,7 @@ public class ElementScript : MonoBehaviour
 
                     }
 
-                    else if (Input.GetButtonDown("R3 " + PlayerNumber) && (Input.GetAxis("Vertical " + PlayerNumber) != 0))
+                    else if (Input.GetButtonDown("Tri " + PlayerNumber) && (Input.GetAxis("Vertical " + PlayerNumber) != 0))
                     {
                         moveDirection.x = 0;
 
@@ -234,7 +244,7 @@ public class ElementScript : MonoBehaviour
                         state = State.DuringAttack;
                     }
 
-                    else if (Input.GetButtonDown("R3 " + PlayerNumber) && (Input.GetAxis("Horizontal " + PlayerNumber) != 0))
+                    else if (Input.GetButtonDown("Tri " + PlayerNumber) && (Input.GetAxis("Horizontal " + PlayerNumber) != 0))
                     {
                         moveDirection.x = 0;
 
@@ -243,7 +253,7 @@ public class ElementScript : MonoBehaviour
                         state = State.DuringAttack;
                     }
 
-                    else if (Input.GetAxis("Horizontal " + PlayerNumber) > 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
+                    else if (Input.GetAxis("Horizontal " + PlayerNumber) != 0 && (Input.GetButtonDown("Squ " + PlayerNumber)))
                     {
                         moveDirection.x = 0;
 
@@ -284,7 +294,7 @@ public class ElementScript : MonoBehaviour
 
                 }
 
-
+                // ガード状態でなければ
                 if (subState != State.SGuard && subState != State.CGuard)
                 {
 
@@ -295,7 +305,7 @@ public class ElementScript : MonoBehaviour
                         state = State.DuringAttack;
                     }
 
-                    else if (Input.GetButtonDown("R3 " + PlayerNumber) && Input.GetAxis("Vertical " + PlayerNumber) < 0)
+                    else if (Input.GetButtonDown("Tri " + PlayerNumber) && Input.GetAxis("Vertical " + PlayerNumber) < 0)
                     {
                         animator.Play("Chuudan");
 
@@ -726,19 +736,32 @@ public class ElementScript : MonoBehaviour
     public void SetMoveState()
     {
 
-        if (animator.GetBool("Crouch"))
+        if (animator)
         {
-            animator.SetBool("Crouch", false);
+            if (animator.GetBool("Crouch"))
+            {
+                animator.SetBool("Crouch", false);
+            }
+
+            state = State.Move;
         }
 
-        state = State.Move;
 
     }
 
     // StateをCrouchにする(しゃがみ攻撃の後など)
     public void SetCrouchState()
     {
-        state = State.Crouch;
+        if (animator)
+        {
+            if (!animator.GetBool("Crouch"))
+            {
+                animator.SetBool("Crouch", false);
+            }
+
+            state = State.Crouch;
+        }
+
     }
 
     // stateをアニメーションイベントの引数から指定
@@ -746,6 +769,14 @@ public class ElementScript : MonoBehaviour
     {
         switch (goState)
         {
+
+            case "DuringAttack":
+
+                moveDirection.x = 0;
+
+                state = State.DuringAttack;
+
+                break;
 
             case "Damage":
 
@@ -937,6 +968,8 @@ public class ElementScript : MonoBehaviour
 
         if (Vector3.Distance(Player.position, Enemy.position) <= 1.2f && enEs.IsGrounded() && enEs.state != State.DamageDown && enEs.subState != State.Muteki)
         {
+            moveDirection.x = 0;
+
             animator.StopPlayback();
 
             enEs.state = State.Nagerare;
